@@ -15,7 +15,7 @@ tags: []
 ## The following data was used to create the data visualizations that follow
 
 
-```{r message= FALSE}
+```{r message= FALSE, echo=FALSE}
 library(dplyr)
 mtcars 
 ```
@@ -27,3 +27,12 @@ library(ggplot2)
 ggplot(mtcars, aes(x = wt, y= mpg),colour(cyl)) +
   geom_point() + labs(title = "Miles per Gallon vs. weight of vehicles from 1974", x = "weight(1000lb)", y = "Miles per Gallon")
 ```
+
+## The second data visualization is categorical and defines the number of cylinders in the engines of the vehicles of 1974
+
+```{r}
+library(ggplot2)
+ggplot(mtcars, aes(x = cyl,)) +
+  geom_bar()+ labs(title = "Number of cyclinders in engines of cars from 1974", x = "Number of Cylinders", y = "Count")
+```
+

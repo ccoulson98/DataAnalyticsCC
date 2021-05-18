@@ -20,8 +20,6 @@ tags: []
 </div>
 <div id="the-following-data-was-used-to-create-the-data-visualizations-that-follow" class="section level2">
 <h2>The following data was used to create the data visualizations that follow</h2>
-<pre class="r"><code>library(dplyr)
-mtcars </code></pre>
 <pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 ## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
 ## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
@@ -62,4 +60,11 @@ mtcars </code></pre>
 ggplot(mtcars, aes(x = wt, y= mpg),colour(cyl)) +
   geom_point() + labs(title = &quot;Miles per Gallon vs. weight of vehicles from 1974&quot;, x = &quot;weight(1000lb)&quot;, y = &quot;Miles per Gallon&quot;)</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="the-second-data-visualization-is-categorical-and-defines-the-number-of-cylinders-in-the-engines-of-the-vehicles-of-1974" class="section level2">
+<h2>The second data visualization is categorical and defines the number of cylinders in the engines of the vehicles of 1974</h2>
+<pre class="r"><code>library(ggplot2)
+ggplot(mtcars, aes(x = cyl,)) +
+  geom_bar()+ labs(title = &quot;Number of cyclinders in engines of cars from 1974&quot;, x = &quot;Number of Cylinders&quot;, y = &quot;Count&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
