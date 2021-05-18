@@ -1,0 +1,28 @@
+---
+title: Data Visualization using ggplot2
+author: CalebCoulson
+date: '2021-05-18'
+slug: data-visualization-using-ggplot2
+categories: []
+tags: []
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="palmer-penguins-data-analysis" class="section level2">
+<h2>Palmer Penguins Data Analysis</h2>
+<pre class="r"><code>library(palmerpenguins)
+library(ggplot2)
+ggplot(data = penguins,
+       mapping = aes(x = bill_depth_mm,
+                     y = bill_length_mm,
+                     colour = species)) +
+  geom_point() +
+  labs(title = &quot;Bill depth and length&quot;,
+       subtitle = &quot;Dimensions for Adelie, Chinstrap, and Gentoo Penguins&quot;,
+       x = &quot;Bill depth (mm)&quot;, y = &quot;Bill length (mm)&quot;,
+       colour = &quot;Species&quot;)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>

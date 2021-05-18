@@ -8,7 +8,9 @@ categories:
 tags: []
 ---
 
+
 ##Data Visualization Exercise
+
 ```{r message=FALSE}
 library(dplyr)
 starwars
