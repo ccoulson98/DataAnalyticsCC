@@ -12,13 +12,15 @@ tags: []
 * one Numerical visualization
 * one Categorical data visualization
 
-## The first Data visualization concerns ata was extracted from the 1974 Motor Trend US magazine and relates the weight of vehicles to the miles per gallon
+## The following data was used to create the data visualizations that follow
 
 
 ```{r message= FALSE}
 library(dplyr)
 mtcars 
 ```
+
+## The first Data visualization concerns ata was extracted from the 1974 Motor Trend US magazine and relates the weight of vehicles to the miles per gallon
 
 ```{r}
 library(ggplot2)
