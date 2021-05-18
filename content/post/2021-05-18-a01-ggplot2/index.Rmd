@@ -1,0 +1,22 @@
+---
+title: 'A01: GGPLOT2'
+author: CalebCoulson
+date: '2021-05-18'
+slug: a01-ggplot2
+categories: []
+tags: []
+---
+## This post contains two data visualizations, and are as follows
+
+* one Numerical visualization
+* one Categorical data visualization
+
+## The first Data visualization concerns ata was extracted from the 1974 Motor Trend US magazine and relates the weight of vehicles to the miles per gallon
+
+```{r}
+library(dplyr)
+mtcars 
+ggplot(mtcars, aes(x = wt, y = mpg),colour(cyl)) +
+  geom_point() 
+```
+
