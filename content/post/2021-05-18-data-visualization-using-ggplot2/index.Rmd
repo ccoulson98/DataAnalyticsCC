@@ -7,7 +7,7 @@ categories: []
 tags: []
 ---
 ## Palmer Penguins Data Analysis 
-```{r}
+```{r warning=FALSE}
 library(palmerpenguins)
 library(ggplot2)
 ggplot(data = penguins,
