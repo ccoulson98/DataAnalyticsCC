@@ -30,7 +30,7 @@ ggplot(mtcars, aes(x = wt, y= mpg),colour(cyl)) +
   geom_point() + labs(title = "Miles per Gallon vs. weight of vehicles from 1974", x = "weight(1000lb)", y = "Miles per Gallon")
 ```
 
-### From the previous plot it can be seen that as the weight of the vehicle increases, the miles per galon decreases, as is to be expected.
+
 
 ## The second data visualization is categorical and defines the number of cylinders in the engines of the vehicles of 1974
 
@@ -40,4 +40,6 @@ ggplot(mtcars, aes(x = cyl,fill = vs)) +
   geom_bar()+ labs(title = "Number of cyclinders in engines of cars from 1974", x = "Number of Cylinders", y = "Count")
 ```
 
-### From the second plot it can be seen that the most popular category of "engine cylinders" is an 8 cylinder. 
+
+#### From the first data plot it can be seen that as mass increased, the miles per gallon of the vehicle decreeased. From the second plot it can be seen that the most popular category of "engine cylinders" is an 8 cylinder. During this blog post I found it exciting that my original thought about how the data would look concerning the distribution of weight and miles per gallon was correct. However I was suprrised to find out that the most common engine cylinder number was not a 6 cylinder beacuse this is used for both trucks and passenger vehicles. During this post I had some troubles originionally getting the new post to upload my data to the website but I restarted Rstudio and reinstalled some packages and everything sorted itself out. 
+
