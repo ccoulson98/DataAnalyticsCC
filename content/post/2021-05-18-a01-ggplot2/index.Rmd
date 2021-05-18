@@ -6,6 +6,7 @@ slug: a01-ggplot2
 categories: []
 tags: []
 ---
+
 ## This post contains two data visualizations, and are as follows
 
 * one Numerical visualization
