@@ -17,11 +17,28 @@ library(ggplot2)
 ggplot(data = penguins,
        mapping = aes(x = bill_depth_mm,
                      y = bill_length_mm,
-                     colour = species)) +
-  geom_point() +
-  labs(title = &quot;Bill depth and length&quot;,
+                     colour = species, shape = island)) +
+  geom_point() + facet_grid(species ~ sex)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>  labs(title = &quot;Bill depth and length&quot;,
        subtitle = &quot;Dimensions for Adelie, Chinstrap, and Gentoo Penguins&quot;,
        x = &quot;Bill depth (mm)&quot;, y = &quot;Bill length (mm)&quot;,
        colour = &quot;Species&quot;)</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre><code>## $x
+## [1] &quot;Bill depth (mm)&quot;
+## 
+## $y
+## [1] &quot;Bill length (mm)&quot;
+## 
+## $colour
+## [1] &quot;Species&quot;
+## 
+## $title
+## [1] &quot;Bill depth and length&quot;
+## 
+## $subtitle
+## [1] &quot;Dimensions for Adelie, Chinstrap, and Gentoo Penguins&quot;
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;labels&quot;</code></pre>
 </div>

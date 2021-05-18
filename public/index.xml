@@ -8,6 +8,15 @@
     <language>en-us</language>
     <lastBuildDate>Tue, 18 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>A01: GGPLOT2</title>
+      <link>/2021/05/18/a01-ggplot2/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/05/18/a01-ggplot2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Data and Visualization</title>
       <link>/2021/05/18/data-and-visualization/</link>
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
@@ -18,12 +27,21 @@ library(dplyr)starwars## # A tibble: 87 x 14## name height mass hair_color sk
     </item>
     
     <item>
+      <title>Data Visualization using ggplot2</title>
+      <link>/2021/05/18/data-visualization-using-ggplot2/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/05/18/data-visualization-using-ggplot2/</guid>
+      <description>Palmer Penguins Data Analysislibrary(palmerpenguins)library(ggplot2)ggplot(data = penguins,mapping = aes(x = bill_depth_mm,y = bill_length_mm,colour = species, shape = island)) +geom_point() + facet_grid(species ~ sex) labs(title = &amp;quot;Bill depth and length&amp;quot;,subtitle = &amp;quot;Dimensions for Adelie, Chinstrap, and Gentoo Penguins&amp;quot;,x = &amp;quot;Bill depth (mm)&amp;quot;, y = &amp;quot;Bill length (mm)&amp;quot;,colour = &amp;quot;Species&amp;quot;)## $x## [1] &amp;quot;Bill depth (mm)&amp;quot;## ## $y## [1] &amp;quot;Bill length (mm)&amp;quot;## ## $colour## [1] &amp;quot;Species&amp;quot;## ## $title## [1] &amp;quot;Bill depth and length&amp;quot;## ## $subtitle## [1] &amp;quot;Dimensions for Adelie, Chinstrap, and Gentoo Penguins&amp;quot;## ## attr(,&amp;quot;class&amp;quot;)## [1] &amp;quot;labels&amp;quot;</description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>/about/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
       <guid>/about/</guid>
-      <description>This is a &amp;ldquo;hello world&amp;rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
+      <description>My name is Caleb Coulson, I am currently taking my MSCE at UNB. I am from BIble Hill Nova Scotia. My hobbies are fishing, hunting, and Golfing.</description>
     </item>
     
   </channel>

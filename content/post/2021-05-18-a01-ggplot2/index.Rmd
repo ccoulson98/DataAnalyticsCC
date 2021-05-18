@@ -16,7 +16,7 @@ tags: []
 ```{r}
 library(dplyr)
 mtcars 
-ggplot(mtcars, aes(x = wt, y = mpg),colour(cyl)) +
-  geom_point() 
+ggplot(mtcars, aes(x = wt, y= mpg),colour(cyl)) +
+  geom_point() + labs(title = "Miles per Gallon vs. weight of vehicles from 1974", x = "weight(1000lb)", y = "Miles per Gallon")
 ```
 
