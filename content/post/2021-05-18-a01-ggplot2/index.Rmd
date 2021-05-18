@@ -20,7 +20,9 @@ library(dplyr)
 mtcars 
 ```
 
-## The first Data visualization concerns ata was extracted from the 1974 Motor Trend US magazine and relates the weight of vehicles to the miles per gallon
+## The first Data visualization concerns ata was extracted from the 1974 Motor Trend US magazine and relates the weight of vehicles to the miles per gallon. 
+
+
 
 ```{r}
 library(ggplot2)
@@ -28,11 +30,14 @@ ggplot(mtcars, aes(x = wt, y= mpg),colour(cyl)) +
   geom_point() + labs(title = "Miles per Gallon vs. weight of vehicles from 1974", x = "weight(1000lb)", y = "Miles per Gallon")
 ```
 
+### From the previous plot it can be seen that as the weight of the vehicle increases, the miles per galon decreases, as is to be expected.
+
 ## The second data visualization is categorical and defines the number of cylinders in the engines of the vehicles of 1974
 
 ```{r echo=FALSE}
 library(ggplot2)
-ggplot(mtcars, aes(x = cyl,)) +
+ggplot(mtcars, aes(x = cyl,fill = vs)) +
   geom_bar()+ labs(title = "Number of cyclinders in engines of cars from 1974", x = "Number of Cylinders", y = "Count")
 ```
 
+### From the second plot it can be seen that the most popular category of "engine cylinders" is an 8 cylinder. 
