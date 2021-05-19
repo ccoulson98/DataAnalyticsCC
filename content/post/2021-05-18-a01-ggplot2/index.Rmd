@@ -20,7 +20,7 @@ library(dplyr)
 mtcars 
 ```
 
-## The first Data visualization concerns ata was extracted from the 1974 Motor Trend US magazine and relates the weight of vehicles to the miles per gallon. 
+## The first Data visualization concerns data that was extracted from the 1974 Motor Trend US magazine and relates the weight of vehicles to the miles per gallon. 
 
 
 
@@ -32,14 +32,15 @@ ggplot(mtcars, aes(x = wt, y= mpg),colour(cyl)) +
 
 
 
-## The second data visualization is categorical and defines the number of cylinders in the engines of the vehicles of 1974
+## The second data visualization is categorical and defines the number of cylinders in the engines of the vehicles of 1974, as well as their shapes.
 
 ```{r echo=FALSE}
 library(ggplot2)
-ggplot(mtcars, aes(x = cyl,fill = vs)) +
+ggplot(mtcars, aes(x = factor(cyl),fill = factor(vs))) +
   geom_bar()+ labs(title = "Number of cyclinders in engines of cars from 1974", x = "Number of Cylinders", y = "Count")
 ```
 
+### In this data plot the number of cyclinders and their shapes have been displayed, in his case the red corrisponds to v shaped engines, and blue corrisponds to straight shaped engines.
 
-#### From the first data plot it can be seen that as mass increased, the miles per gallon of the vehicle decreeased. From the second plot it can be seen that the most popular category of "engine cylinders" is an 8 cylinder. During this blog post I found it exciting that my original thought about how the data would look concerning the distribution of weight and miles per gallon was correct. However I was suprrised to find out that the most common engine cylinder number was not a 6 cylinder beacuse this is used for both trucks and passenger vehicles. During this post I had some troubles originionally getting the new post to upload my data to the website but I restarted Rstudio and reinstalled some packages and everything sorted itself out. 
+#### From the first data plot it can be seen that as mass increased, the miles per gallon of the vehicle decreeased. From the second plot it can be seen that the most popular category of "engine cylinders" is an 8 cylinder, and as the number of cylinders increases, the shape is more often v shaped. During this blog post I found it exciting that my original thought about how the data would look concerning the distribution of weight and miles per gallon was correct. However I was suprrised to find out that the most common engine cylinder number was not a 6 cylinder beacuse this is used for both trucks and passenger vehicles. During this post I had some troubles originionally getting the new post to upload my data to the website but I restarted Rstudio and reinstalled some packages and everything sorted itself out. 
 
