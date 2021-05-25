@@ -37,7 +37,8 @@ ggplot(mtcars, aes(x = wt, y= mpg),colour(cyl)) +
 ```{r echo=FALSE}
 library(ggplot2)
 ggplot(mtcars, aes(x = factor(cyl),fill = factor(vs))) +
-  geom_bar()+ labs(title = "Number of cyclinders in engines of cars from 1974", x = "Number of Cylinders", y = "Count")
+  geom_bar()+ labs(title = "Number of cyclinders in engines of cars from 1974", x = "Number of Cylinders", y = "Count") 
+
 ```
 
 ### In this data plot the number of cyclinders and their shapes have been displayed, in his case the red corrisponds to v shaped engines, and blue corrisponds to straight shaped engines.
