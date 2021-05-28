@@ -40,6 +40,7 @@ ggplot(golf2017UP, aes(x=AVG_Driving_DISTANCE, y=TOP10_percent)) +
   geom_point()
 
 ```
+
 ## Adding Player column to match maning convention of 2017 stats
 ```{r}
 golf2020UP <- golf2020 %>%
@@ -84,3 +85,16 @@ pivot_longer(
 arrange(desc(years))
 
 ```
+## CREATING SUMMARY TABLE OF AVERAGE ONE, TWO, AND THREE PUTTS FOR 18 HOLES FOR EACH PLAYER IN THE PGA IN 2020
+```{r}
+golf2020 %>%
+pivot_longer(
+  cols = c(PUTTING_AVG_ONE_PUTTS, PUTTING_AVG_TWO_PUTTS, PUTTING_AVG_THREE_PUTTS),
+  names_to = "putting averages",
+  values_to = "value"
+  ) %>%
+  select('PLAYER NAME','putting averages', value)
+```
+
+#### while I was working on this assignment I selected the PGA tour stats because I am a big fan of golf and wanted to see if I could get some good data corrilaton. However I was suprised to find out hat no single stat was a good predictor of ho would win or come top 10 the most in a single season. I struggled learning how to properly use the tidying (pivot) functions but figured it out eventually!
+

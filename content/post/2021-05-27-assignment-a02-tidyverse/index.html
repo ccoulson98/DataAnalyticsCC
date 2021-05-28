@@ -220,8 +220,10 @@ golf2020 &lt;- read_csv(&quot;pga_tour_stats_2020.csv&quot;)</code></pre>
 <h2>Plotting the relationship of top 10 finishes to average driving distance</h2>
 <pre class="r"><code>ggplot(golf2017UP, aes(x=AVG_Driving_DISTANCE, y=TOP10_percent)) +
   geom_point()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" />
-## Adding Player column to match maning convention of 2017 stats</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="adding-player-column-to-match-maning-convention-of-2017-stats" class="section level2">
+<h2>Adding Player column to match maning convention of 2017 stats</h2>
 <pre class="r"><code>golf2020UP &lt;- golf2020 %&gt;%
   mutate(Player = `PLAYER NAME`)</code></pre>
 </div>
@@ -352,4 +354,31 @@ arrange(desc(years))</code></pre>
 ##  9 Tom Hoge           AGE                45            31
 ## 10 Cameron Percy      AGE                44            16
 ## # ... with 185 more rows</code></pre>
+</div>
+<div id="creating-summary-table-of-average-one-two-and-three-putts-for-18-holes-for-each-player-in-the-pga-in-2020" class="section level2">
+<h2>CREATING SUMMARY TABLE OF AVERAGE ONE, TWO, AND THREE PUTTS FOR 18 HOLES FOR EACH PLAYER IN THE PGA IN 2020</h2>
+<pre class="r"><code>golf2020 %&gt;%
+pivot_longer(
+  cols = c(PUTTING_AVG_ONE_PUTTS, PUTTING_AVG_TWO_PUTTS, PUTTING_AVG_THREE_PUTTS),
+  names_to = &quot;putting averages&quot;,
+  values_to = &quot;value&quot;
+  ) %&gt;%
+  select(&#39;PLAYER NAME&#39;,&#39;putting averages&#39;, value)</code></pre>
+<pre><code>## # A tibble: 1,071 x 3
+##    `PLAYER NAME`      `putting averages`      value
+##    &lt;chr&gt;              &lt;chr&gt;                   &lt;dbl&gt;
+##  1 Zac Blair          PUTTING_AVG_ONE_PUTTS    7.58
+##  2 Zac Blair          PUTTING_AVG_TWO_PUTTS    9.58
+##  3 Zac Blair          PUTTING_AVG_THREE_PUTTS  0.06
+##  4 Jimmy Walker       PUTTING_AVG_ONE_PUTTS    6.98
+##  5 Jimmy Walker       PUTTING_AVG_TWO_PUTTS   10.3 
+##  6 Jimmy Walker       PUTTING_AVG_THREE_PUTTS  0.02
+##  7 Cameron Percy      PUTTING_AVG_ONE_PUTTS    6.76
+##  8 Cameron Percy      PUTTING_AVG_TWO_PUTTS   10.5 
+##  9 Cameron Percy      PUTTING_AVG_THREE_PUTTS  0.02
+## 10 Sebastian Cappelen PUTTING_AVG_ONE_PUTTS    7.21
+## # ... with 1,061 more rows</code></pre>
+<div id="while-i-was-working-on-this-assignment-i-selected-the-pga-tour-stats-because-i-am-a-big-fan-of-golf-and-wanted-to-see-if-i-could-get-some-good-data-corrilaton.-however-i-was-suprised-to-find-out-hat-no-single-stat-was-a-good-predictor-of-ho-would-win-or-come-top-10-the-most-in-a-single-season.-i-struggled-learning-how-to-properly-use-the-tidying-pivot-functions-but-figured-it-out-eventually" class="section level4">
+<h4>while I was working on this assignment I selected the PGA tour stats because I am a big fan of golf and wanted to see if I could get some good data corrilaton. However I was suprised to find out hat no single stat was a good predictor of ho would win or come top 10 the most in a single season. I struggled learning how to properly use the tidying (pivot) functions but figured it out eventually!</h4>
+</div>
 </div>
