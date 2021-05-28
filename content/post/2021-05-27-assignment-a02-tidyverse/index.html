@@ -1,0 +1,355 @@
+---
+title: 'Assignment A02: TIDYVERSE'
+author: CalebCoulson
+date: '2021-05-27'
+slug: assignment-a02-tidyverse
+categories: []
+tags: []
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(ggplot2)
+library(gapminder)
+library(tidyr)</code></pre>
+<div id="inporting-data-from-2017-and-2020-pga-tour-season" class="section level2">
+<h2>Inporting data from 2017 and 2020 PGA tour season</h2>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
+<pre><code>## v tibble  3.1.1     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.1
+## v purrr   0.3.4</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>golf2017 &lt;- read_csv(&quot;PGATOUR_data2.csv&quot;)</code></pre>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   .default = col_double(),
+##   Player = col_character(),
+##   FAIRWAYS_HIT = col_number(),
+##   TOTAL_DRIVES = col_number()
+## )
+## i Use `spec()` for the full column specifications.</code></pre>
+<pre class="r"><code>head(golf2017)</code></pre>
+<pre><code>## # A tibble: 6 x 69
+##   Player   EVENTS_PLAYED POINTS NUMBER_OF_WINS NUMBER_OF_TOP_T~ POINTS_BEHIND_L~
+##   &lt;chr&gt;            &lt;dbl&gt;  &lt;dbl&gt;          &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Aaron B~            27    342              0                1             5275
+## 2 Aaron W~            27   1498              1                4             4119
+## 3 Abraham~            29    909              0                5             4708
+## 4 Adam Ha~            24   1054              0                3             4563
+## 5 Adam Sc~            28    239              0                1             5378
+## 6 Adam Sc~            20   1052              0                3             4565
+## # ... with 63 more variables: ROUNDS_PLAYED &lt;dbl&gt;, SG_PUTTING_PER_ROUND &lt;dbl&gt;,
+## #   TOTAL_SG:PUTTING &lt;dbl&gt;, MEASURED_ROUNDS &lt;dbl&gt;, AVG_Driving_DISTANCE &lt;dbl&gt;,
+## #   UP_AND_DOWN_% &lt;dbl&gt;, PAR_OR_BETTER &lt;dbl&gt;, MISSED_GIR &lt;dbl&gt;,
+## #   FAIRWAY_HIT_% &lt;dbl&gt;, FAIRWAYS_HIT &lt;dbl&gt;, POSSIBLE_FAIRWAYS &lt;dbl&gt;,
+## #   GIR_RANK &lt;dbl&gt;, GOING_FOR_GREEN_IN_2% &lt;dbl&gt;, ATTEMPTS_GFG &lt;dbl&gt;,
+## #   NON-ATTEMPTS_GFG &lt;dbl&gt;, RTP-GOING_FOR_THE_GREEN &lt;dbl&gt;,
+## #   RTP-NOT_GOING_FOR_THE_GRN &lt;dbl&gt;, HOLE_OUTS &lt;dbl&gt;, SAND_SAVE% &lt;dbl&gt;,
+## #   NUMBER_OF_SAVES &lt;dbl&gt;, NUMBER_OF_BUNKERS &lt;dbl&gt;, TOTAL_O/U_PAR &lt;dbl&gt;,
+## #   Three_PUTT% &lt;dbl&gt;, TOTAL_3_PUTTS &lt;dbl&gt;, SG_PER_ROUND &lt;dbl&gt;, SG:OTT &lt;dbl&gt;,
+## #   SG:APR &lt;dbl&gt;, SG:ARG &lt;dbl&gt;, DRIVES_320+% &lt;dbl&gt;,
+## #   TOTAL_DRIVES_FOR_320+ &lt;dbl&gt;, TOTAL_DRIVES &lt;dbl&gt;, ROUGH_TENDNECY% &lt;dbl&gt;,
+## #   TOTAL_ROUGH &lt;dbl&gt;, FAIRWAY_BUNKER% &lt;dbl&gt;, TOTAL_FAIRWAY_BUNKERS &lt;dbl&gt;,
+## #   AVG_CLUB_HEAD_SPEED &lt;dbl&gt;, FASTEST_CH_SPEED &lt;dbl&gt;, SLOWEST_CH_SPEED &lt;dbl&gt;,
+## #   AVG_BALL_SPEED &lt;dbl&gt;, FASTEST_BALL_SPEED &lt;dbl&gt;, SLOWEST_BALL_SPEED &lt;dbl&gt;,
+## #   AVG_SMASH_FACTOR &lt;dbl&gt;, HIGHEST_SF &lt;dbl&gt;, LOWEST_SF &lt;dbl&gt;,
+## #   AVG_LAUNCH_ANGLE &lt;dbl&gt;, LOWEST_LAUNCH_ANGLE &lt;dbl&gt;,
+## #   STEEPEST_LAUNCH_ANGLE &lt;dbl&gt;, AVG_SPIN_RATE &lt;dbl&gt;, HIGHEST_SPIN_RATE &lt;dbl&gt;,
+## #   LOWEST_SPIN_RATE &lt;dbl&gt;, AVG_HANG_TIME &lt;dbl&gt;, LONGEST_ACT.HANG_TIME &lt;dbl&gt;,
+## #   SHORTEST_ACT.HANG_TIME &lt;dbl&gt;, AVG_CARRY_DISTANCE &lt;dbl&gt;,
+## #   LONGEST_CARRY_DISTANCE &lt;dbl&gt;, SHORTEST_CARRY_DISTANCE &lt;dbl&gt;,
+## #   AVG_SCORE &lt;dbl&gt;, TOTAL_STROKES &lt;dbl&gt;, TOTAL_ROUNDS &lt;dbl&gt;,
+## #   MAKES_BOGEY% &lt;dbl&gt;, BOGEYS_MADE &lt;dbl&gt;, HOLES_PLAYED &lt;dbl&gt;, AGE &lt;dbl&gt;</code></pre>
+<pre class="r"><code>names(golf2017)</code></pre>
+<pre><code>##  [1] &quot;Player&quot;                    &quot;EVENTS_PLAYED&quot;            
+##  [3] &quot;POINTS&quot;                    &quot;NUMBER_OF_WINS&quot;           
+##  [5] &quot;NUMBER_OF_TOP_Tens&quot;        &quot;POINTS_BEHIND_LEAD&quot;       
+##  [7] &quot;ROUNDS_PLAYED&quot;             &quot;SG_PUTTING_PER_ROUND&quot;     
+##  [9] &quot;TOTAL_SG:PUTTING&quot;          &quot;MEASURED_ROUNDS&quot;          
+## [11] &quot;AVG_Driving_DISTANCE&quot;      &quot;UP_AND_DOWN_%&quot;            
+## [13] &quot;PAR_OR_BETTER&quot;             &quot;MISSED_GIR&quot;               
+## [15] &quot;FAIRWAY_HIT_%&quot;             &quot;FAIRWAYS_HIT&quot;             
+## [17] &quot;POSSIBLE_FAIRWAYS&quot;         &quot;GIR_RANK&quot;                 
+## [19] &quot;GOING_FOR_GREEN_IN_2%&quot;     &quot;ATTEMPTS_GFG&quot;             
+## [21] &quot;NON-ATTEMPTS_GFG&quot;          &quot;RTP-GOING_FOR_THE_GREEN&quot;  
+## [23] &quot;RTP-NOT_GOING_FOR_THE_GRN&quot; &quot;HOLE_OUTS&quot;                
+## [25] &quot;SAND_SAVE%&quot;                &quot;NUMBER_OF_SAVES&quot;          
+## [27] &quot;NUMBER_OF_BUNKERS&quot;         &quot;TOTAL_O/U_PAR&quot;            
+## [29] &quot;Three_PUTT%&quot;               &quot;TOTAL_3_PUTTS&quot;            
+## [31] &quot;SG_PER_ROUND&quot;              &quot;SG:OTT&quot;                   
+## [33] &quot;SG:APR&quot;                    &quot;SG:ARG&quot;                   
+## [35] &quot;DRIVES_320+%&quot;              &quot;TOTAL_DRIVES_FOR_320+&quot;    
+## [37] &quot;TOTAL_DRIVES&quot;              &quot;ROUGH_TENDNECY%&quot;          
+## [39] &quot;TOTAL_ROUGH&quot;               &quot;FAIRWAY_BUNKER%&quot;          
+## [41] &quot;TOTAL_FAIRWAY_BUNKERS&quot;     &quot;AVG_CLUB_HEAD_SPEED&quot;      
+## [43] &quot;FASTEST_CH_SPEED&quot;          &quot;SLOWEST_CH_SPEED&quot;         
+## [45] &quot;AVG_BALL_SPEED&quot;            &quot;FASTEST_BALL_SPEED&quot;       
+## [47] &quot;SLOWEST_BALL_SPEED&quot;        &quot;AVG_SMASH_FACTOR&quot;         
+## [49] &quot;HIGHEST_SF&quot;                &quot;LOWEST_SF&quot;                
+## [51] &quot;AVG_LAUNCH_ANGLE&quot;          &quot;LOWEST_LAUNCH_ANGLE&quot;      
+## [53] &quot;STEEPEST_LAUNCH_ANGLE&quot;     &quot;AVG_SPIN_RATE&quot;            
+## [55] &quot;HIGHEST_SPIN_RATE&quot;         &quot;LOWEST_SPIN_RATE&quot;         
+## [57] &quot;AVG_HANG_TIME&quot;             &quot;LONGEST_ACT.HANG_TIME&quot;    
+## [59] &quot;SHORTEST_ACT.HANG_TIME&quot;    &quot;AVG_CARRY_DISTANCE&quot;       
+## [61] &quot;LONGEST_CARRY_DISTANCE&quot;    &quot;SHORTEST_CARRY_DISTANCE&quot;  
+## [63] &quot;AVG_SCORE&quot;                 &quot;TOTAL_STROKES&quot;            
+## [65] &quot;TOTAL_ROUNDS&quot;              &quot;MAKES_BOGEY%&quot;             
+## [67] &quot;BOGEYS_MADE&quot;               &quot;HOLES_PLAYED&quot;             
+## [69] &quot;AGE&quot;</code></pre>
+<pre class="r"><code>library(tidyverse)
+golf2020 &lt;- read_csv(&quot;pga_tour_stats_2020.csv&quot;)</code></pre>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   .default = col_double(),
+##   `PLAYER NAME` = col_character(),
+##   FINISHES_OFFICIAL_MONEY = col_character(),
+##   FINISHES_OFFICIAL_UNOFFICIAL_MONEY = col_character(),
+##   TEE_AVG_APEX = col_character(),
+##   TEE_AVG_DISTANCE_FROM_CENTER_FR = col_character(),
+##   PUTTING_APPROACH_PERFORMANCE = col_character(),
+##   PUTTING_AVG_DIST_BIRDIE = col_character(),
+##   PUTTING_AVG_DIST_EAGLE = col_character(),
+##   PUTTING_AVG_DIST_MADE = col_character()
+## )
+## i Use `spec()` for the full column specifications.</code></pre>
+<pre class="r"><code>head(golf2020)</code></pre>
+<pre><code>## # A tibble: 6 x 73
+##   `PLAYER NAME`    AVG_APPROACH_BIRDIE_O~ AVG_APPROACH_BOGEY_O~ AVG_APPROACH_PAR
+##   &lt;chr&gt;                             &lt;dbl&gt;                 &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Zac Blair                          153.                  159.             158.
+## 2 Jimmy Walker                       157.                  167.             160.
+## 3 Cameron Percy                      161.                  164              162.
+## 4 Sebastian Cappe~                   162.                  161.             154.
+## 5 Brian Gay                          162.                  160.             156.
+## 6 Ted Potter, Jr.                    163.                  166.             156.
+## # ... with 69 more variables: AVG_APPROACH_SHOT_DISTANCE &lt;dbl&gt;,
+## #   FAIRWAY_APPROACH_RTP &lt;dbl&gt;, GIR_PCT_FAIRWAY_BUNKER &lt;dbl&gt;,
+## #   GIR_PCT_FAIRWAY &lt;dbl&gt;, GIR_PCT_OTHER &lt;dbl&gt;, GIR_PCT_OVERALL &lt;dbl&gt;,
+## #   GIR_PCT_100-125 &lt;dbl&gt;, GIR_PCT_OVER_100 &lt;dbl&gt;, GIR_PCT_125-150 &lt;dbl&gt;,
+## #   GIR_PCT_150-175 &lt;dbl&gt;, GIR_PCT_175-200 &lt;dbl&gt;, GIR_PCT_OVER_200 &lt;dbl&gt;,
+## #   GIR_PCT_75-100 &lt;dbl&gt;, GIR_PCT_UNDER_100 &lt;dbl&gt;, GIR_PCT_UNDER_125 &lt;dbl&gt;,
+## #   GIR_PCT_UNDER_75 &lt;dbl&gt;, GREEN_PCT_SAND_SAVES &lt;dbl&gt;,
+## #   GREEN_PCT_SCRAMBLE &lt;dbl&gt;, GREEN_PCT_SCRAMBLE_FRINGE &lt;dbl&gt;,
+## #   GREEN_PCT_SCRAMBLE_ROUGH &lt;dbl&gt;, GREEN_PCT_SCRAMBLE_SAND &lt;dbl&gt;,
+## #   FINISHES_FEDEXCUP_BONUS &lt;dbl&gt;, FINISHES_OFFICIAL_MONEY &lt;chr&gt;,
+## #   FINISHES_TOP10 &lt;dbl&gt;, FINISHES_OFFICIAL_UNOFFICIAL_MONEY &lt;chr&gt;,
+## #   TEE_AVG_APEX &lt;chr&gt;, TEE_AVG_BALL_SPEED &lt;dbl&gt;, TEE_BALL_STRIKING &lt;dbl&gt;,
+## #   TEE_AVG_CARRY &lt;dbl&gt;, TEE_LONGEST_CARRY_DISTANCE &lt;dbl&gt;,
+## #   TEE_AVG_CARRY_EFF &lt;dbl&gt;, TEE_AVG_CLUB_HEAD_SPEED &lt;dbl&gt;,
+## #   TEE_AVG_DISTANCE_FROM_CENTER_FR &lt;chr&gt;, TEE_DRIVING_ACCURACY_PCT &lt;dbl&gt;,
+## #   TEE_AVG_DRIVING_DISTANCE &lt;dbl&gt;, TEE_AVG_FAIRWAY_BUNKER_TENDENCY_PCT &lt;dbl&gt;,
+## #   TEE_AVG_FIR_PCT &lt;dbl&gt;, TEE_AVG_LAUNCH_ANGLE &lt;dbl&gt;,
+## #   TEE_AVG_LEFT_ROUGH_TENDENCY_PCT &lt;dbl&gt;, TEE_LONGEST_DRIVES &lt;dbl&gt;,
+## #   TEE_AVG_RIGHT_ROUGH_TENDENCY_PCT &lt;dbl&gt;, TEE_AVG_SMASH_FACTOR &lt;dbl&gt;,
+## #   TEE_AVG_SPIN_RATE &lt;dbl&gt;, PUTTING_AVG_ONE_PUTTS &lt;dbl&gt;,
+## #   PUTTING_AVG_TWO_PUTTS &lt;dbl&gt;, PUTTING_AVG_THREE_PUTTS &lt;dbl&gt;,
+## #   PUTTING_APPROACH_PERFORMANCE &lt;chr&gt;, PUTTING_AVG_DIST_BIRDIE &lt;chr&gt;,
+## #   PUTTING_AVG_DIST_EAGLE &lt;chr&gt;, PUTTING_AVG_DIST_MADE &lt;chr&gt;,
+## #   PUTTING_PCT_BIRDIE_OR_BETTER &lt;dbl&gt;, PUTTING_AVG_OVERALL &lt;dbl&gt;,
+## #   PUTTING_AVG_PUTTS &lt;dbl&gt;, SCORING_AVG_BIRDIES &lt;dbl&gt;,
+## #   SCORING_PCT_BIRDIE_OR_BETTER &lt;dbl&gt;, SCORING_BIRDIE_BOGEY_RATIO &lt;dbl&gt;,
+## #   SCORING_BOGEY_AVERAGE &lt;dbl&gt;, SCORING_EAGLES_PER_HOLE &lt;dbl&gt;,
+## #   SCORING_PAR3_AVERAGE &lt;dbl&gt;, SCORING_PAR4_AVERAGE &lt;dbl&gt;,
+## #   SCORING_PAR5_AVERAGE &lt;dbl&gt;, SCORING_ROUNDS_IN_60S &lt;dbl&gt;,
+## #   SCORING_AVG_OVERALL &lt;dbl&gt;, SCORING_TOTAL_BIRDIES &lt;dbl&gt;,
+## #   SCORING_TOTAL_EAGLES &lt;dbl&gt;, STREAKS_CUTS_MADE &lt;dbl&gt;,
+## #   STREAKS_FIRS_MADE &lt;dbl&gt;, STREAKS_GIRS_MADE &lt;dbl&gt;,
+## #   STREAKS_HOLES_UNDER_PAR &lt;dbl&gt;</code></pre>
+<pre class="r"><code>names(golf2020)</code></pre>
+<pre><code>##  [1] &quot;PLAYER NAME&quot;                         &quot;AVG_APPROACH_BIRDIE_OR_BETTER&quot;      
+##  [3] &quot;AVG_APPROACH_BOGEY_OR_WORSE&quot;         &quot;AVG_APPROACH_PAR&quot;                   
+##  [5] &quot;AVG_APPROACH_SHOT_DISTANCE&quot;          &quot;FAIRWAY_APPROACH_RTP&quot;               
+##  [7] &quot;GIR_PCT_FAIRWAY_BUNKER&quot;              &quot;GIR_PCT_FAIRWAY&quot;                    
+##  [9] &quot;GIR_PCT_OTHER&quot;                       &quot;GIR_PCT_OVERALL&quot;                    
+## [11] &quot;GIR_PCT_100-125&quot;                     &quot;GIR_PCT_OVER_100&quot;                   
+## [13] &quot;GIR_PCT_125-150&quot;                     &quot;GIR_PCT_150-175&quot;                    
+## [15] &quot;GIR_PCT_175-200&quot;                     &quot;GIR_PCT_OVER_200&quot;                   
+## [17] &quot;GIR_PCT_75-100&quot;                      &quot;GIR_PCT_UNDER_100&quot;                  
+## [19] &quot;GIR_PCT_UNDER_125&quot;                   &quot;GIR_PCT_UNDER_75&quot;                   
+## [21] &quot;GREEN_PCT_SAND_SAVES&quot;                &quot;GREEN_PCT_SCRAMBLE&quot;                 
+## [23] &quot;GREEN_PCT_SCRAMBLE_FRINGE&quot;           &quot;GREEN_PCT_SCRAMBLE_ROUGH&quot;           
+## [25] &quot;GREEN_PCT_SCRAMBLE_SAND&quot;             &quot;FINISHES_FEDEXCUP_BONUS&quot;            
+## [27] &quot;FINISHES_OFFICIAL_MONEY&quot;             &quot;FINISHES_TOP10&quot;                     
+## [29] &quot;FINISHES_OFFICIAL_UNOFFICIAL_MONEY&quot;  &quot;TEE_AVG_APEX&quot;                       
+## [31] &quot;TEE_AVG_BALL_SPEED&quot;                  &quot;TEE_BALL_STRIKING&quot;                  
+## [33] &quot;TEE_AVG_CARRY&quot;                       &quot;TEE_LONGEST_CARRY_DISTANCE&quot;         
+## [35] &quot;TEE_AVG_CARRY_EFF&quot;                   &quot;TEE_AVG_CLUB_HEAD_SPEED&quot;            
+## [37] &quot;TEE_AVG_DISTANCE_FROM_CENTER_FR&quot;     &quot;TEE_DRIVING_ACCURACY_PCT&quot;           
+## [39] &quot;TEE_AVG_DRIVING_DISTANCE&quot;            &quot;TEE_AVG_FAIRWAY_BUNKER_TENDENCY_PCT&quot;
+## [41] &quot;TEE_AVG_FIR_PCT&quot;                     &quot;TEE_AVG_LAUNCH_ANGLE&quot;               
+## [43] &quot;TEE_AVG_LEFT_ROUGH_TENDENCY_PCT&quot;     &quot;TEE_LONGEST_DRIVES&quot;                 
+## [45] &quot;TEE_AVG_RIGHT_ROUGH_TENDENCY_PCT&quot;    &quot;TEE_AVG_SMASH_FACTOR&quot;               
+## [47] &quot;TEE_AVG_SPIN_RATE&quot;                   &quot;PUTTING_AVG_ONE_PUTTS&quot;              
+## [49] &quot;PUTTING_AVG_TWO_PUTTS&quot;               &quot;PUTTING_AVG_THREE_PUTTS&quot;            
+## [51] &quot;PUTTING_APPROACH_PERFORMANCE&quot;        &quot;PUTTING_AVG_DIST_BIRDIE&quot;            
+## [53] &quot;PUTTING_AVG_DIST_EAGLE&quot;              &quot;PUTTING_AVG_DIST_MADE&quot;              
+## [55] &quot;PUTTING_PCT_BIRDIE_OR_BETTER&quot;        &quot;PUTTING_AVG_OVERALL&quot;                
+## [57] &quot;PUTTING_AVG_PUTTS&quot;                   &quot;SCORING_AVG_BIRDIES&quot;                
+## [59] &quot;SCORING_PCT_BIRDIE_OR_BETTER&quot;        &quot;SCORING_BIRDIE_BOGEY_RATIO&quot;         
+## [61] &quot;SCORING_BOGEY_AVERAGE&quot;               &quot;SCORING_EAGLES_PER_HOLE&quot;            
+## [63] &quot;SCORING_PAR3_AVERAGE&quot;                &quot;SCORING_PAR4_AVERAGE&quot;               
+## [65] &quot;SCORING_PAR5_AVERAGE&quot;                &quot;SCORING_ROUNDS_IN_60S&quot;              
+## [67] &quot;SCORING_AVG_OVERALL&quot;                 &quot;SCORING_TOTAL_BIRDIES&quot;              
+## [69] &quot;SCORING_TOTAL_EAGLES&quot;                &quot;STREAKS_CUTS_MADE&quot;                  
+## [71] &quot;STREAKS_FIRS_MADE&quot;                   &quot;STREAKS_GIRS_MADE&quot;                  
+## [73] &quot;STREAKS_HOLES_UNDER_PAR&quot;</code></pre>
+</div>
+<div id="determining-the-of-top-10-finishes-for-players-who-played-20-or-more-events" class="section level2">
+<h2>Determining The % of top 10 finishes for players who played 20 or more events</h2>
+<pre class="r"><code>golf2017UP &lt;- golf2017 %&gt;%
+  group_by(NUMBER_OF_TOP_Tens) %&gt;%
+ filter(NUMBER_OF_TOP_Tens &gt;= 3) %&gt;%
+  mutate(TOP10_percent = NUMBER_OF_TOP_Tens/EVENTS_PLAYED)</code></pre>
+</div>
+<div id="plotting-the-relationship-of-top-10-finishes-to-average-driving-distance" class="section level2">
+<h2>Plotting the relationship of top 10 finishes to average driving distance</h2>
+<pre class="r"><code>ggplot(golf2017UP, aes(x=AVG_Driving_DISTANCE, y=TOP10_percent)) +
+  geom_point()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+## Adding Player column to match maning convention of 2017 stats</p>
+<pre class="r"><code>golf2020UP &lt;- golf2020 %&gt;%
+  mutate(Player = `PLAYER NAME`)</code></pre>
+</div>
+<div id="combining-all-data" class="section level2">
+<h2>Combining all data</h2>
+<pre class="r"><code>golf2017UP %&gt;%
+  full_join(golf2020UP, by = &#39;Player&#39;)</code></pre>
+<pre><code>## # A tibble: 360 x 143
+## # Groups:   NUMBER_OF_TOP_Tens [10]
+##    Player  EVENTS_PLAYED POINTS NUMBER_OF_WINS NUMBER_OF_TOP_T~ POINTS_BEHIND_L~
+##    &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;          &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+##  1 Aaron ~            27   1498              1                4             4119
+##  2 Abraha~            29    909              0                5             4708
+##  3 Adam H~            24   1054              0                3             4563
+##  4 Adam S~            20   1052              0                3             4565
+##  5 Alex N~            17   1033              0                3             4584
+##  6 Andrew~            26   1145              1                5             4472
+##  7 Andrew~            27   1063              1                5             4554
+##  8 Anirba~            24    566              0                4             5051
+##  9 Austin~            28   1094              1                3             4523
+## 10 Beau H~            27   1043              0                5             4574
+## # ... with 350 more rows, and 137 more variables: ROUNDS_PLAYED &lt;dbl&gt;,
+## #   SG_PUTTING_PER_ROUND &lt;dbl&gt;, TOTAL_SG:PUTTING &lt;dbl&gt;, MEASURED_ROUNDS &lt;dbl&gt;,
+## #   AVG_Driving_DISTANCE &lt;dbl&gt;, UP_AND_DOWN_% &lt;dbl&gt;, PAR_OR_BETTER &lt;dbl&gt;,
+## #   MISSED_GIR &lt;dbl&gt;, FAIRWAY_HIT_% &lt;dbl&gt;, FAIRWAYS_HIT &lt;dbl&gt;,
+## #   POSSIBLE_FAIRWAYS &lt;dbl&gt;, GIR_RANK &lt;dbl&gt;, GOING_FOR_GREEN_IN_2% &lt;dbl&gt;,
+## #   ATTEMPTS_GFG &lt;dbl&gt;, NON-ATTEMPTS_GFG &lt;dbl&gt;, RTP-GOING_FOR_THE_GREEN &lt;dbl&gt;,
+## #   RTP-NOT_GOING_FOR_THE_GRN &lt;dbl&gt;, HOLE_OUTS &lt;dbl&gt;, SAND_SAVE% &lt;dbl&gt;,
+## #   NUMBER_OF_SAVES &lt;dbl&gt;, NUMBER_OF_BUNKERS &lt;dbl&gt;, TOTAL_O/U_PAR &lt;dbl&gt;,
+## #   Three_PUTT% &lt;dbl&gt;, TOTAL_3_PUTTS &lt;dbl&gt;, SG_PER_ROUND &lt;dbl&gt;, SG:OTT &lt;dbl&gt;,
+## #   SG:APR &lt;dbl&gt;, SG:ARG &lt;dbl&gt;, DRIVES_320+% &lt;dbl&gt;,
+## #   TOTAL_DRIVES_FOR_320+ &lt;dbl&gt;, TOTAL_DRIVES &lt;dbl&gt;, ROUGH_TENDNECY% &lt;dbl&gt;,
+## #   TOTAL_ROUGH &lt;dbl&gt;, FAIRWAY_BUNKER% &lt;dbl&gt;, TOTAL_FAIRWAY_BUNKERS &lt;dbl&gt;,
+## #   AVG_CLUB_HEAD_SPEED &lt;dbl&gt;, FASTEST_CH_SPEED &lt;dbl&gt;, SLOWEST_CH_SPEED &lt;dbl&gt;,
+## #   AVG_BALL_SPEED &lt;dbl&gt;, FASTEST_BALL_SPEED &lt;dbl&gt;, SLOWEST_BALL_SPEED &lt;dbl&gt;,
+## #   AVG_SMASH_FACTOR &lt;dbl&gt;, HIGHEST_SF &lt;dbl&gt;, LOWEST_SF &lt;dbl&gt;,
+## #   AVG_LAUNCH_ANGLE &lt;dbl&gt;, LOWEST_LAUNCH_ANGLE &lt;dbl&gt;,
+## #   STEEPEST_LAUNCH_ANGLE &lt;dbl&gt;, AVG_SPIN_RATE &lt;dbl&gt;, HIGHEST_SPIN_RATE &lt;dbl&gt;,
+## #   LOWEST_SPIN_RATE &lt;dbl&gt;, AVG_HANG_TIME &lt;dbl&gt;, LONGEST_ACT.HANG_TIME &lt;dbl&gt;,
+## #   SHORTEST_ACT.HANG_TIME &lt;dbl&gt;, AVG_CARRY_DISTANCE &lt;dbl&gt;,
+## #   LONGEST_CARRY_DISTANCE &lt;dbl&gt;, SHORTEST_CARRY_DISTANCE &lt;dbl&gt;,
+## #   AVG_SCORE &lt;dbl&gt;, TOTAL_STROKES &lt;dbl&gt;, TOTAL_ROUNDS &lt;dbl&gt;,
+## #   MAKES_BOGEY% &lt;dbl&gt;, BOGEYS_MADE &lt;dbl&gt;, HOLES_PLAYED &lt;dbl&gt;, AGE &lt;dbl&gt;,
+## #   TOP10_percent &lt;dbl&gt;, PLAYER NAME &lt;chr&gt;,
+## #   AVG_APPROACH_BIRDIE_OR_BETTER &lt;dbl&gt;, AVG_APPROACH_BOGEY_OR_WORSE &lt;dbl&gt;,
+## #   AVG_APPROACH_PAR &lt;dbl&gt;, AVG_APPROACH_SHOT_DISTANCE &lt;dbl&gt;,
+## #   FAIRWAY_APPROACH_RTP &lt;dbl&gt;, GIR_PCT_FAIRWAY_BUNKER &lt;dbl&gt;,
+## #   GIR_PCT_FAIRWAY &lt;dbl&gt;, GIR_PCT_OTHER &lt;dbl&gt;, GIR_PCT_OVERALL &lt;dbl&gt;,
+## #   GIR_PCT_100-125 &lt;dbl&gt;, GIR_PCT_OVER_100 &lt;dbl&gt;, GIR_PCT_125-150 &lt;dbl&gt;,
+## #   GIR_PCT_150-175 &lt;dbl&gt;, GIR_PCT_175-200 &lt;dbl&gt;, GIR_PCT_OVER_200 &lt;dbl&gt;,
+## #   GIR_PCT_75-100 &lt;dbl&gt;, GIR_PCT_UNDER_100 &lt;dbl&gt;, GIR_PCT_UNDER_125 &lt;dbl&gt;,
+## #   GIR_PCT_UNDER_75 &lt;dbl&gt;, GREEN_PCT_SAND_SAVES &lt;dbl&gt;,
+## #   GREEN_PCT_SCRAMBLE &lt;dbl&gt;, GREEN_PCT_SCRAMBLE_FRINGE &lt;dbl&gt;,
+## #   GREEN_PCT_SCRAMBLE_ROUGH &lt;dbl&gt;, GREEN_PCT_SCRAMBLE_SAND &lt;dbl&gt;,
+## #   FINISHES_FEDEXCUP_BONUS &lt;dbl&gt;, FINISHES_OFFICIAL_MONEY &lt;chr&gt;,
+## #   FINISHES_TOP10 &lt;dbl&gt;, FINISHES_OFFICIAL_UNOFFICIAL_MONEY &lt;chr&gt;,
+## #   TEE_AVG_APEX &lt;chr&gt;, TEE_AVG_BALL_SPEED &lt;dbl&gt;, TEE_BALL_STRIKING &lt;dbl&gt;,
+## #   TEE_AVG_CARRY &lt;dbl&gt;, TEE_LONGEST_CARRY_DISTANCE &lt;dbl&gt;,
+## #   TEE_AVG_CARRY_EFF &lt;dbl&gt;, TEE_AVG_CLUB_HEAD_SPEED &lt;dbl&gt;, ...</code></pre>
+</div>
+<div id="adding-2017-and-2020-pga-tour-stats-using-inner-join-to-show-who-was-on-tour-both-years-and-comparing-their-club-head-speeds-to-see-who-added-most-speed-to-driver." class="section level2">
+<h2>Adding 2017 and 2020 PGA tour stats using inner join, to show who was on tour both years, and comparing their club head speeds to see who added most speed to driver.</h2>
+<pre class="r"><code>golf2017UP %&gt;%
+  inner_join(golf2020UP, by = &#39;Player&#39;) %&gt;%
+mutate(speed_change = (TEE_AVG_CLUB_HEAD_SPEED-AVG_CLUB_HEAD_SPEED)) %&gt;%
+  select(Player,speed_change) %&gt;% 
+  arrange(desc(speed_change))</code></pre>
+<pre><code>## Adding missing grouping variables: `NUMBER_OF_TOP_Tens`</code></pre>
+<pre><code>## # A tibble: 91 x 3
+## # Groups:   NUMBER_OF_TOP_Tens [9]
+##    NUMBER_OF_TOP_Tens Player            speed_change
+##                 &lt;dbl&gt; &lt;chr&gt;                    &lt;dbl&gt;
+##  1                  9 Bryson DeChambeau         7.33
+##  2                  3 Danny Lee                 3.48
+##  3                  5 Beau Hossler              3.46
+##  4                  6 Brian Gay                 3.45
+##  5                  5 Luke List                 2.24
+##  6                  3 Russell Knox              2.19
+##  7                  5 Si Woo Kim                1.94
+##  8                  7 Patrick Cantlay           1.18
+##  9                  4 Matt Kuchar               1.01
+## 10                  3 Patrick Rodgers           1   
+## # ... with 81 more rows</code></pre>
+</div>
+<div id="comparing-top-10-finishers-to-their-odds-of-getting-ball-up-and-down-around-green" class="section level2">
+<h2>Comparing top 10 finishers to their odds of getting ball up and down around green</h2>
+<pre class="r"><code>golf2020 %&gt;%
+  group_by(FINISHES_TOP10) %&gt;%
+  summarise(UP_DOWN_PERC=mean(GREEN_PCT_SCRAMBLE_FRINGE)) %&gt;%
+  drop_na(FINISHES_TOP10) %&gt;%
+  arrange(desc(FINISHES_TOP10))</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    FINISHES_TOP10 UP_DOWN_PERC
+##             &lt;dbl&gt;        &lt;dbl&gt;
+##  1             10         94.4
+##  2              9         88.5
+##  3              8         92.4
+##  4              7         91.5
+##  5              6         94.8
+##  6              5         88.5
+##  7              4         92.0
+##  8              3         88.4
+##  9              2         NA  
+## 10              1         NA</code></pre>
+</div>
+<div id="comparing-age-of-player-to-events-played-in-2017" class="section level2">
+<h2>comparing age of player to events played in 2017</h2>
+<pre class="r"><code>golf2017 %&gt;%
+pivot_longer(
+  cols = AGE,
+  names_to = &quot;AGE OF PLAYER&quot;,
+  values_to = &quot;years&quot;
+) %&gt;%
+  select(Player, &#39;AGE OF PLAYER&#39;, years, EVENTS_PLAYED) %&gt;%
+  drop_na(EVENTS_PLAYED) %&gt;%
+arrange(desc(years))</code></pre>
+<pre><code>## # A tibble: 195 x 4
+##    Player             `AGE OF PLAYER` years EVENTS_PLAYED
+##    &lt;chr&gt;              &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Retief Goosen      AGE                49            20
+##  2 Jim Furyk          AGE                48            15
+##  3 Phil Mickelson     AGE                48            22
+##  4 Rod Pampling       AGE                48            20
+##  5 Alex Cejka         AGE                47            24
+##  6 Padraig Harrington AGE                47            16
+##  7 Brian Gay          AGE                46            29
+##  8 Stewart Cink       AGE                45            25
+##  9 Tom Hoge           AGE                45            31
+## 10 Cameron Percy      AGE                44            16
+## # ... with 185 more rows</code></pre>
+</div>

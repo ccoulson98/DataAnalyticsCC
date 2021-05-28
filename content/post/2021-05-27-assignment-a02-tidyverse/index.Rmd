@@ -1,0 +1,86 @@
+---
+title: 'Assignment A02: TIDYVERSE'
+author: CalebCoulson
+date: '2021-05-27'
+slug: assignment-a02-tidyverse
+categories: []
+tags: []
+---
+```{r}
+library(dplyr)
+library(ggplot2)
+library(gapminder)
+library(tidyr)
+```
+
+
+## Inporting data from 2017 and 2020 PGA tour season
+```{r}
+library(tidyverse)
+golf2017 <- read_csv("PGATOUR_data2.csv")
+head(golf2017)
+names(golf2017)
+library(tidyverse)
+golf2020 <- read_csv("pga_tour_stats_2020.csv")
+head(golf2020)
+names(golf2020)
+```
+
+## Determining The % of top 10 finishes for players who played 20 or more events
+```{r}
+golf2017UP <- golf2017 %>%
+  group_by(NUMBER_OF_TOP_Tens) %>%
+ filter(NUMBER_OF_TOP_Tens >= 3) %>%
+  mutate(TOP10_percent = NUMBER_OF_TOP_Tens/EVENTS_PLAYED)
+```
+
+## Plotting the relationship of top 10 finishes to average driving distance
+```{r}
+ggplot(golf2017UP, aes(x=AVG_Driving_DISTANCE, y=TOP10_percent)) +
+  geom_point()
+
+```
+## Adding Player column to match maning convention of 2017 stats
+```{r}
+golf2020UP <- golf2020 %>%
+  mutate(Player = `PLAYER NAME`)
+```
+
+
+## Combining all data
+```{r}
+golf2017UP %>%
+  full_join(golf2020UP, by = 'Player')
+```
+
+## Adding 2017 and 2020 PGA tour stats using inner join, to show who was on tour both years, and comparing their club head speeds to see who added most speed to driver.
+```{r}
+golf2017UP %>%
+  inner_join(golf2020UP, by = 'Player') %>%
+mutate(speed_change = (TEE_AVG_CLUB_HEAD_SPEED-AVG_CLUB_HEAD_SPEED)) %>%
+  select(Player,speed_change) %>% 
+  arrange(desc(speed_change))
+```
+
+## Comparing top 10 finishers to their odds of getting ball up and down around green
+```{r}
+golf2020 %>%
+  group_by(FINISHES_TOP10) %>%
+  summarise(UP_DOWN_PERC=mean(GREEN_PCT_SCRAMBLE_FRINGE)) %>%
+  drop_na(FINISHES_TOP10) %>%
+  arrange(desc(FINISHES_TOP10))
+```
+
+## comparing age of player to events played in 2017
+```{r}
+golf2017 %>%
+pivot_longer(
+  cols = AGE,
+  names_to = "AGE OF PLAYER",
+  values_to = "years"
+) %>%
+  select(Player, 'AGE OF PLAYER', years, EVENTS_PLAYED) %>%
+  drop_na(EVENTS_PLAYED) %>%
+arrange(desc(years))
+
+```
