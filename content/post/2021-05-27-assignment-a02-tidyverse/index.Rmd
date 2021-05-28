@@ -96,5 +96,5 @@ pivot_longer(
   select('PLAYER NAME','putting averages', value)
 ```
 
-#### while I was working on this assignment I selected the PGA tour stats because I am a big fan of golf and wanted to see if I could get some good data corrilaton. However I was suprised to find out hat no single stat was a good predictor of ho would win or come top 10 the most in a single season. I struggled learning how to properly use the tidying (pivot) functions but figured it out eventually!
+#### while I was working on this assignment I selected the PGA tour stats because I am a big fan of golf and wanted to see if I could get some good data corrilaton. However I was suprised to find out hat no single stat was a good predictor of ho would win or come top 10 the most in a single season. I struggled learning how to properly use the tidying (pivot) functions but figured it out eventually! I follow the PGA closely and I know that bryson DEechambeau has added a lot of distance to his driver so i used this as a check to ensure my code was right, when i saw he was at the top of the list i knew my code was correct. I was suprised to see that the age of the golfer did not correlate much to the number of events played, was anticipating the older players to play much less however this was not the case. Overall i enjoyed this assignemnt but it was a lot harder than the last one.
 
