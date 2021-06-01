@@ -7,6 +7,10 @@ categories: []
 tags: []
 ---
 
+```{r}
+library(blogdown)
+```
+
 ## Import Nobel.csv file
 ```{r}
 nobel <- read_csv(file ="nobel.csv")
@@ -85,4 +89,5 @@ fav_food %>%
   count(ses)
 fav_food
 ```
+
 
