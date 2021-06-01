@@ -9,6 +9,7 @@ tags: []
 
 ## Inport and transform Relig-income.csv
 ```{r}
+library(tidyverse)
 library(readxl)
 rel_inc <- read_excel("relig-income.xlsx")
 rel_inc_long <- rel_inc %>%
