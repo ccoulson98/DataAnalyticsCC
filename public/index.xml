@@ -6,7 +6,25 @@
     <description>Recent content on CalebCoulson - Fundamental of Analytics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data IO</title>
+      <link>/2021/06/01/data-io/</link>
+      <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/01/data-io/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Assignment A02: TIDYVERSE</title>
+      <link>/2021/05/27/assignment-a02-tidyverse/</link>
+      <pubDate>Thu, 27 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/05/27/assignment-a02-tidyverse/</guid>
+      <description>library(dplyr)## ## Attaching package: &amp;#39;dplyr&amp;#39;## The following objects are masked from &amp;#39;package:stats&amp;#39;:## ## filter, lag## The following objects are masked from &amp;#39;package:base&amp;#39;:## ## intersect, setdiff, setequal, unionlibrary(ggplot2)library(gapminder)library(tidyr)Inporting data from 2017 and 2020 PGA tour seasonlibrary(tidyverse)## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --## v tibble 3.1.1 v stringr 1.4.0## v readr 1.4.0 v forcats 0.5.1## v purrr 0.</description>
+    </item>
+    
     <item>
       <title>Data Wrangling using Tidyverse</title>
       <link>/2021/05/25/data-wrangling-using-tidyverse/</link>
