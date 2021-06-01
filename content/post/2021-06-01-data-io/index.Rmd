@@ -1,6 +1,6 @@
 ---
-title: Data IO
-author: Caleb Coulson
+title: "Data IO"
+author: "Caleb Coulson"
 date: '2021-06-01'
 slug: data-io
 categories: []
@@ -10,6 +10,7 @@ tags: []
 
 ## Import Nobel.csv file
 ```{r}
+library(tidyverse)
 nobel <- read_csv(file ="nobel.csv")
 head(nobel)
 ```
