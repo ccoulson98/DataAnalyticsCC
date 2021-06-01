@@ -1,6 +1,6 @@
 ---
-title: data recoding
-author: Caleb Coulson
+title: "data recoding"
+author: "Caleb Coulson"
 date: '2021-06-01'
 slug: data-recoding
 categories: []
@@ -42,7 +42,7 @@ rel_inc_long <- rel_inc_long %>%
   geom_col()
 ```
 
-## Add Fill for income
+## Add Fill for income, and then change theme
 ```{r}
 ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) + 
   geom_col()
@@ -53,10 +53,8 @@ ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
 ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
   geom_col(position = "fill") +
   scale_fill_viridis_d()
-```
 
-## Change theme of plot
-```{r}
+
 ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
   geom_col(position = "fill") +
   scale_fill_viridis_d() +
@@ -69,3 +67,4 @@ ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
     subtitle = "Source: Pew Research Center, Religious Landscape Study", 
     fill = "Income" 
     )
+```
