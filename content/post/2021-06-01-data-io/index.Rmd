@@ -7,9 +7,6 @@ categories: []
 tags: []
 ---
 
-```{r}
-library(blogdown)
-```
 
 ## Import Nobel.csv file
 ```{r}
