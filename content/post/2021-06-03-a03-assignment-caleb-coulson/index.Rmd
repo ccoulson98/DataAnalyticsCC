@@ -1,0 +1,111 @@
+---
+title: "A03 Assignment - Caleb Coulson"
+author: "Caleb Coulson"
+date: '2021-06-03'
+slug: a03-assignment-caleb-coulson
+categories: []
+tags: []
+---
+
+## inporting data and loading librarys
+```{r}
+library(tidyverse)
+library(readxl)
+lego_sales <- read_csv("lego_sales.csv")
+print(lego_sales)
+```
+
+## most common first names 
+```{r}
+lego_sales %>%
+  count(first_name) %>%
+  arrange(desc(n))
+```
+### From this it is apparant that "Jackson" is the most common first name with a count of 13
+
+## most common theme
+```{r}
+lego_sales %>%
+  count(theme) %>%
+  arrange(desc(n))
+```
+### From this it is apparant that "star wars" is the most common theme with a count of 75
+
+
+## most common sub-theme for star wars
+```{r}
+lego_sales %>%
+  filter(theme == 'Star Wars') %>%
+  count(subtheme) %>%
+  arrange(desc(n))
+```
+### From this it is apparant that "The Force Awakens" is the most common subtheme within the star wars theme with a count of 15
+
+## creating new variable "age_group"
+```{r}
+updated_lego_sales <- lego_sales %>%
+  mutate(age_group = case_when(
+    age <= 18 ~ '18 and under',
+    between(age, 19, 25) ~ '19 - 25',
+    between(age, 26, 35) ~ '26 - 35',
+    between(age, 36, 50) ~ '36 - 50',
+    TRUE ~ '51 and over'))
+```
+
+## answering Question 5 probabilities
+```{r}
+## part a
+updated_lego_sales %>%
+  count(age_group) %>%
+  mutate(prob_a=(n/sum(n)))
+
+## part b
+updated_lego_sales %>%
+  count(age_group, theme) %>%
+ mutate(prob_b=(n/sum(n)))
+ 
+## part c
+updated_lego_sales %>%
+  count(age_group, theme) %>%
+filter(theme=='Duplo') %>%
+  mutate(prob_c=(n/sum(n)))
+
+```
+### From this it can be seen that the probability..
+### a randomly selected customer is in the 19 - 25 age group = 0.2080645
+### a randomly selected customer is in the 19 - 25 age group and purchased a Duplo theme set = 0.014516129
+###  a randomly selected customeris in the 19 - 25 age group given they purchased a Duplo theme set = 0.25714286	
+
+## part 6 (Which age group has purchased the largest number of lego sets? How many did they purchase)
+```{r}
+updated_lego_sales %>%
+  count(age_group)
+```
+### from this it can be seen that the age group that has purchased the most lego sets is the 36-50 age group, and they purchaced 216 sets
+
+## part 7 (Which age group has spent the most money on legos? How much did they spend?)
+```{r}
+updated_lego_sales %>%
+  count(age_group,us_price) %>%
+  mutate(total_cost = us_price*n) %>%
+   group_by(age_group) %>%
+   mutate(cost_sum= sum(total_cost))
+```
+### from this it can be seen that the 36-50 age group spent the most money on legos and spent a total of $6641.84
+
+
+## Part 8 - The question i want to see answered is how the ammounnt of pieces affects the price of the set, and Im also going to color it by age_group to see if there is a trend in what price lego sets the age groups buy.
+```{r}
+ggplot(updated_lego_sales, aes(x=pieces, y=us_price, color=age_group)) +
+  geom_point() 
+```
+
+## part 9 - i have changed both the x and y axis to log scales to spread out the data more, in addition to this I have changed the theme to a dark version because I like this more for aestetics.
+```{r}
+ggplot(updated_lego_sales, aes(x=pieces, y=us_price, color=age_group)) +
+  geom_point() +
+  scale_x_log10()+
+  scale_y_log10() + 
+  theme_dark()
+```
+
