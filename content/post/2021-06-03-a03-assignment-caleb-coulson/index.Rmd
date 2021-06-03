@@ -100,6 +100,9 @@ ggplot(updated_lego_sales, aes(x=pieces, y=us_price, color=age_group)) +
   geom_point() 
 ```
 
+### This shows that as the pieces move upwards, there is a general trend for the price to increase as expected, however there is no trend when considering the age group and the price/piece's in a set, it is gereally fairly evenly distributed.
+
+
 ## part 9 - i have changed both the x and y axis to log scales to spread out the data more, in addition to this I have changed the theme to a dark version because I like this more for aestetics.
 ```{r}
 ggplot(updated_lego_sales, aes(x=pieces, y=us_price, color=age_group)) +
