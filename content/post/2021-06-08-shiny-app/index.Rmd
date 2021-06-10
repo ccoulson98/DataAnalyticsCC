@@ -1,0 +1,18 @@
+---
+title: Shiny App
+author: Caleb Coulson
+date: '2021-06-08'
+slug: shiny-app
+categories: []
+tags: []
+runtime: shiney
+output: html_document
+---
+
+```{r}
+library(shiny)
+```
+
+```
+<iframe height="800" width="100%" frameborder="no" src="https://ccoulson.shinyapps.io/DataAnalyticsCC/"> </iframe>
+```

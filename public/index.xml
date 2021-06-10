@@ -6,7 +6,35 @@
     <description>Recent content on CalebCoulson - Fundamental of Analytics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 10 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Assignment 4 Caleb Coulson: Canadian provinces covid cases</title>
+      <link>/2021/06/10/assignment-4-caleb-coulson-canadian-provinces-covid-cases/</link>
+      <pubDate>Thu, 10 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/10/assignment-4-caleb-coulson-canadian-provinces-covid-cases/</guid>
+      <description>Covid cases in Canada analysisThis app summarizes the total cases in each province in Canada and also in Canada from January to May of 2020&amp;lt;iframe src=“https://ccoulson.shinyapps.io/A4CalebCoulson/”height=“800” width=“100% frameborder=”no&#34;&amp;gt;
+</description>
+    </item>
+    
+    <item>
+      <title>shiny</title>
+      <link>/2021/06/08/shiny/</link>
+      <pubDate>Tue, 08 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/08/shiny/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shiny App</title>
+      <link>/2021/06/08/shiny-app/</link>
+      <pubDate>Tue, 08 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/08/shiny-app/</guid>
+      <description>library(shiny)&amp;lt;iframe height=&amp;quot;800&amp;quot; width=&amp;quot;100%&amp;quot; frameborder=&amp;quot;no&amp;quot; src=&amp;quot;https://ccoulson.shinyapps.io/DataAnalyticsCC/&amp;quot;&amp;gt; &amp;lt;/iframe&amp;gt;</description>
+    </item>
+    
     <item>
       <title>A03 Assignment - Caleb Coulson</title>
       <link>/2021/06/03/a03-assignment-caleb-coulson/</link>

@@ -1,0 +1,18 @@
+---
+title: 'Assignment 4 Caleb Coulson: Canadian provinces covid cases'
+author: Caleb Coulson
+date: '2021-06-10'
+slug: assignment-4-caleb-coulson-canadian-provinces-covid-cases
+categories:
+  - shiny
+  - ggplot2
+  - tidyverse
+tags: []
+runtime: shiny
+output: html_document 
+---
+
+## Covid cases in Canada analysis
+This app summarizes the total cases in each province in Canada and also  in Canada from January to May of 2020
+<iframe src="https://ccoulson.shinyapps.io/A4CalebCoulson/"
+height="800" width="100% frameborder="no"></iframe>

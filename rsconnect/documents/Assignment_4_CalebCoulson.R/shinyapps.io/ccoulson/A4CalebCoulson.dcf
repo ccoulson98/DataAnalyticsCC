@@ -1,0 +1,14 @@
+name: A4CalebCoulson
+title: A4CalebCoulson
+username:
+account: ccoulson
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4253267
+bundleId: 4701194
+url: https://ccoulson.shinyapps.io/A4CalebCoulson/
+when: 1623332690.92617
+lastSyncTime: 1623332690.92617
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|.Rprofile|~$covid19_1105.xlsx|config.yaml|covid-speeches-words.rds|covid19_1105.xlsx|index.Rmd|layouts/shortcodes/blogdown/postref.html|netlify.toml|R/build.R|R/build2.R|shiney.R|static/.gitkeep|content|public|themes

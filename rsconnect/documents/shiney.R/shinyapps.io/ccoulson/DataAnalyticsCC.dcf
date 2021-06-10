@@ -1,0 +1,14 @@
+name: DataAnalyticsCC
+title: DataAnalyticsCC
+username:
+account: ccoulson
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4243449
+bundleId: 4692288
+url: https://ccoulson.shinyapps.io/DataAnalyticsCC/
+when: 1623160314.24853
+lastSyncTime: 1623160314.24853
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|.Rprofile|config.yaml|index.Rmd|layouts/shortcodes/blogdown/postref.html|netlify.toml|R/build.R|R/build2.R|static/.gitkeep|content|public|themes
