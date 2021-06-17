@@ -117,7 +117,7 @@ ggplot(world_data_5, aes(x=Region, y=mean_Life))+
 
 ## The final question I seeked to answer was what region is to blame for the most CO2 emissions?
 
-```{r, echo=FALSE, warning=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 world_data_3 <- world_data %>%
   group_by(Region)%>%
 mutate(CO2_out =`CO2_emission_estimates_(million_tons/tons_per_capita)`) %>%
@@ -125,11 +125,13 @@ mutate(CO2_out =`CO2_emission_estimates_(million_tons/tons_per_capita)`) %>%
 mutate(GDPpercap =`GDP_per_capita_(current_US$)`) %>%
   mutate(mean_GDPpercap=mean(GDPpercap, na.rm = TRUE))
 
+```
+```{r, echo=FALSE, warning=FALSE}
 ggplot(world_data_3, aes(x=Region, y=mean_CO2))+ 
   geom_col()+
   scale_x_discrete(guide = guide_axis(n.dodge=5))
-
 ```
+
 
 ### from this plot it can be seen that the CO2 utput per cap is highest in Easten asia, north america, and westen asia. Now that we have the mean CO2 output, and mean GDP per cap for each region, It would be interesting to see the corrilation of these two values, that can be seen in he following graph
 
