@@ -140,5 +140,6 @@ ggplot(world_data_3, aes(x=mean_GDPpercap, y=mean_CO2))+
    geom_smooth(formula = y ~ x, method= "lm", se= FALSE)
 ```
 
+
 ### while it can be seen that the data set is small as it is 20 or so points, it can be seen that there is a General trend upwards in GDP as the mean CO2 output per capita increases. This again supports the argument that industrialization and urbanization is good for a country's population in terms of wealth, however it is still detrimental to the public's health. 
 
