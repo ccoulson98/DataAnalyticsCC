@@ -1,0 +1,137 @@
+---
+title: 'Assignment 5: Caleb Coulson Data analysis'
+author: "CalebCoulson"
+date: '2021-06-16'
+slug: assignment-5-caleb-coulson-data-analysis
+categories: []
+tags: []
+---
+
+
+# Exploratory Data analysis 
+## Dataset: country profile variables
+
+### This dataset was obtained from kaggle.com and was extracted from UNData which was collected from more than 20 international statistical sources and compiled by the statistics and population division of the United Nations. it covers 4 majors sections whic inclides 
+### 1. General information
+### 2. Economic indicators
+### 3. Social indicators 
+### 4. Environmental & infrastructure indicators
+
+### The data was compiled for 2017
+
+# For this analysis I will post the following inital 4 questions 
+## 1. what are some effects of urbanization 
+## 2. What is the mean gdp of each "region"
+## 3. what are the distributions of life exspectancy
+## 4. what region is most to blame for CO2 outputs
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(ggtext)
+library(ggplot2)
+```
+
+# Insights/discoveries 
+```{r echo = FALSE}
+world_data <- read_csv("country_profile_variables.csv", na = c("-99", "", "NA"),col_names = TRUE )
+```
+## to get some general insights on this data i will first look at the population data 
+
+## Column names were difficult ot use so I decided to fix this, in addition to this, some of the data was inputted into the dataframe as value/value, with both the male and female statistics being stored in the same column, deliniated with a "/", to rectify this I have adjusted the columns that are important to this data analyis in excel by deliniating these values into two sepertae columns. In addition to this, instead of NA being inputted where data was missing, the value "-99" was used a lot so I changed this to display "NA" in these cases
+df_all_og <- full_join(df_eta,df_etd)
+```{r echo = FALSE}
+names(world_data) <- gsub(" ", "_", names(world_data))
+glimpse(world_data)
+```
+
+
+## urbanization is characterized b the influx of people moving from rural areas to urban areas such as cities and towns. This was seen in the ameriacas and western europe after the industrial revolution. Many countries are just reaching this point of mass movement towards cities, and some have no reached it atall. This can have large effects on the GSP, and other aspects of a country, we will explore soe of these now. To explore this, i will use the urban population % as the indicator of urbanization First I will compare the GDP of the countries by their urban population %
+
+```{r echo = FALSE}
+ggplot(world_data, aes(x= `Urban_population_(%_of_total_population)`, y=`GDP_per_capita_(current_US$)`)) +
+  geom_point() 
+```
+#a general trend upwards can be seen, however converting the y axis (GDP) to a log10 scale will make this more prominent, in addition to this I will add a trend line of the data to show the general trend of the data
+```{r echo = FALSE}
+ggplot(world_data, aes(x= `Urban_population_(%_of_total_population)`, y=`GDP_per_capita_(current_US$)`)) +
+  geom_point() +
+  scale_y_log10() + 
+  geom_smooth(method= "lm", se= FALSE)
+```
+
+### From this plot it can be seen that, as expected, the general inflow of people to urban areas, leads to a general increase in GDP. This was seen in the industrial revolution and the same trend is still being seen in many countries today.
+
+
+
+## The second question I set out to explore was what is the mean gdp of each region
+```{r echo = FALSE}
+world_data_2 <- world_data %>%
+  group_by(Region)%>%
+mutate(GDP =`GDP:_Gross_domestic_product_(million_current_US$)`) %>%
+  mutate(mean_GDP=mean(GDP, na.rm = TRUE)) %>%
+mutate(GDPpercap =`GDP_per_capita_(current_US$)`) %>%
+  mutate(mean_GDPpercap=mean(GDPpercap, na.rm = TRUE))
+
+ggplot(world_data_2, aes(x=Region, y=mean_GDP))+ 
+  geom_col()+
+  scale_x_discrete(guide = guide_axis(n.dodge=5))
+
+```
+
+## While GDP is a good indicator or a countries wealth, GDP per capita indicates the wealth of "each person" in the country. A Truely health country will have ahhigh GDP and a high GDP per capita. For that reason this has been displayed in the same manner as the GDP below.
+```{r echo= = FALSE}
+ggplot(world_data_2, aes(x=Region, y=mean_GDPpercap))+ 
+  geom_col()+
+  scale_x_discrete(guide = guide_axis(n.dodge=5))
+```
+### it can be seen that when  the GDP per capita a is displayed that many of the regions are actually quite successfll in comparisson to their total GDP, an example of this would be the carribian, when looking at their total GDP they are very low but when looking attheir GDP per capita they are one of the world leaders.
+
+## The third question I seeked to answer was the distribution of life exspectancy, to look at this I will first create a histogram to get a general idea of the life expectancy's world wide. 
+
+```{r}
+world_data_4<- world_data %>%
+mutate(world_data, Life_expec = as.numeric(`Life_expectancy_at_birth_(females,_years)`,na.rm = TRUE))
+
+ggplot(world_data_4, aes(x=Life_expec))+
+  geom_histogram( binwidth = 2) 
+```
+### from this plot it can be seen that there is a large range of life expectancys, from 49 to 86. To get a better insight as to where life expectancy's are high and low I will break it up by region and get a mean for each region.
+```{r}
+world_data_5 <- world_data %>%
+  group_by(Region)%>%
+  mutate(Life_expec = as.numeric(`Life_expectancy_at_birth_(females,_years)`,na.rm = TRUE)) %>%
+  summarize(mean_Life=mean(Life_expec, na.rm = TRUE))
+glimpse(world_data_5)
+
+ggplot(world_data_5, aes(x=Region, y=mean_Life))+ 
+  geom_col()+
+  scale_x_discrete(guide = guide_axis(n.dodge=5))
+```
+### From this plot it can be seen that there are some regions that have much lower average life expectancy's than others, the 4 worst are the four sections of africa (west, east,south and north africa). 
+
+## The final question I seeked to answer was what region is to blame for the most CO2 emissions?
+
+```{r}
+world_data_3 <- world_data %>%
+  group_by(Region)%>%
+mutate(CO2_out =`CO2_emission_estimates_(million_tons/tons_per_capita)`) %>%
+  mutate(mean_CO2=mean(CO2_out, na.rm = TRUE)) %>%
+mutate(GDPpercap =`GDP_per_capita_(current_US$)`) %>%
+  mutate(mean_GDPpercap=mean(GDPpercap, na.rm = TRUE))
+
+ggplot(world_data_3, aes(x=Region, y=mean_CO2))+ 
+  geom_col()+
+  scale_x_discrete(guide = guide_axis(n.dodge=5))
+
+```
+## from this plot it can be seen that the CO2 utput per cap is highest in Easten asia, north america, and westen asia. Now that we have the mean CO2 output, and mean GDP per cap for each region, It would be interesting to see the corrilation of these two values, that can be seen in he following graph
+
+```{r}
+ggplot(world_data_3, aes(x=mean_GDPpercap, y=mean_CO2))+
+  geom_point() +
+  scale_x_log10() +
+   geom_smooth(method= "lm", se= FALSE)
+```
+### while it can be seen that the data set is small as it is 20 or so points, it can be seen that there is a General trend upwards in GDP as the mean CO2 output per capita increases. This again supports the argument that industrialization and urbanization is good for a country's population in terms of wealth, however it is still detrimental to the public's health. 
+
