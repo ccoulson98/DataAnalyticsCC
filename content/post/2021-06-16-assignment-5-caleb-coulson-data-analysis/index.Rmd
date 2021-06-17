@@ -20,10 +20,10 @@ tags: []
 ### The data was compiled for 2017
 
 # For this analysis I will post the following inital 4 questions 
-## 1. what are some effects of urbanization 
-## 2. What is the mean gdp of each "region"
-## 3. what are the distributions of life exspectancy
-## 4. what region is most to blame for CO2 outputs
+### 1. what are some effects of urbanization 
+### 2. What is the mean gdp of each "region"
+### 3. what are the distributions of life exspectancy
+### 4. what region is most to blame for CO2 outputs
 
 ```{r, echo=FALSE, message=FALSE}
 library(tidyverse)
@@ -38,7 +38,7 @@ world_data <- read_csv("country_profile_variables.csv", na = c("-99", "", "NA"),
 ```
 
 
-### Column names were difficult ot use so I decided to fix this, in addition to this, some of the data was inputted into the dataframe as value/value, with both the male and female statistics being stored in the same column, deliniated with a "/", to rectify this I have adjusted the columns that are important to this data analyis in excel by deliniating these values into two sepertae columns. In addition to this, instead of NA being inputted where data was missing, the value "-99" was used a lot so I changed this to display "NA" in these cases
+### Column names were difficult to use so I decided to fix this, in addition to this, some of the data was inputted into the dataframe as value/value, with both the male and female statistics being stored in the same column, deliniated with a "/", to rectify this I have adjusted the columns that are important to this data analyis in excel by deliniating these values into two sepertae columns. In addition to this, instead of NA being inputted where data was missing, the value "-99" was used a lot so I changed this to display "NA" in these cases.
 
 ```{r, echo=FALSE, message=FALSE}
 names(world_data) <- gsub(" ", "_", names(world_data))
@@ -86,6 +86,7 @@ ggplot(world_data_2, aes(x=Region, y=mean_GDPpercap))+
   geom_col()+
   scale_x_discrete(guide = guide_axis(n.dodge=5))
 ```
+
 ### it can be seen that when  the GDP per capita a is displayed that many of the regions are actually quite successfll in comparisson to their total GDP, an example of this would be the carribian, when looking at their total GDP they are very low but when looking attheir GDP per capita they are one of the world leaders.
 
 ## The third question I seeked to answer was the distribution of life exspectancy, to look at this I will first create a histogram to get a general idea of the life expectancy's world wide. 
@@ -111,6 +112,7 @@ ggplot(world_data_5, aes(x=Region, y=mean_Life))+
   geom_col()+
   scale_x_discrete(guide = guide_axis(n.dodge=5))
 ```
+
 ### From this plot it can be seen that there are some regions that have much lower average life expectancy's than others, the 4 worst are the four sections of africa (west, east,south and north africa). 
 
 ## The final question I seeked to answer was what region is to blame for the most CO2 emissions?
@@ -128,7 +130,8 @@ ggplot(world_data_3, aes(x=Region, y=mean_CO2))+
   scale_x_discrete(guide = guide_axis(n.dodge=5))
 
 ```
-## from this plot it can be seen that the CO2 utput per cap is highest in Easten asia, north america, and westen asia. Now that we have the mean CO2 output, and mean GDP per cap for each region, It would be interesting to see the corrilation of these two values, that can be seen in he following graph
+
+### from this plot it can be seen that the CO2 utput per cap is highest in Easten asia, north america, and westen asia. Now that we have the mean CO2 output, and mean GDP per cap for each region, It would be interesting to see the corrilation of these two values, that can be seen in he following graph
 
 ```{r, echo=FALSE, warning=FALSE}
 ggplot(world_data_3, aes(x=mean_GDPpercap, y=mean_CO2))+
@@ -136,5 +139,6 @@ ggplot(world_data_3, aes(x=mean_GDPpercap, y=mean_CO2))+
   scale_x_log10() +
    geom_smooth(formula = y ~ x, method= "lm", se= FALSE)
 ```
+
 ### while it can be seen that the data set is small as it is 20 or so points, it can be seen that there is a General trend upwards in GDP as the mean CO2 output per capita increases. This again supports the argument that industrialization and urbanization is good for a country's population in terms of wealth, however it is still detrimental to the public's health. 
 
