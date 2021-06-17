@@ -1,6 +1,6 @@
 ---
 title: 'Assignment 5: Caleb Coulson Data analysis'
-author: "CalebCoulson"
+author: Caleb Coulson
 date: '2021-06-16'
 slug: assignment-5-caleb-coulson-data-analysis
 categories: []
@@ -25,7 +25,7 @@ tags: []
 ## 3. what are the distributions of life exspectancy
 ## 4. what region is most to blame for CO2 outputs
 
-```{r}
+```{r, echo=FALSE}
 library(tidyverse)
 library(tidymodels)
 library(ggtext)
@@ -33,14 +33,14 @@ library(ggplot2)
 ```
 
 # Insights/discoveries 
-```{r echo = FALSE}
+```{r}
 world_data <- read_csv("country_profile_variables.csv", na = c("-99", "", "NA"),col_names = TRUE )
 ```
 ## to get some general insights on this data i will first look at the population data 
 
 ## Column names were difficult ot use so I decided to fix this, in addition to this, some of the data was inputted into the dataframe as value/value, with both the male and female statistics being stored in the same column, deliniated with a "/", to rectify this I have adjusted the columns that are important to this data analyis in excel by deliniating these values into two sepertae columns. In addition to this, instead of NA being inputted where data was missing, the value "-99" was used a lot so I changed this to display "NA" in these cases
 df_all_og <- full_join(df_eta,df_etd)
-```{r echo = FALSE}
+```{r}
 names(world_data) <- gsub(" ", "_", names(world_data))
 glimpse(world_data)
 ```
@@ -48,12 +48,12 @@ glimpse(world_data)
 
 ## urbanization is characterized b the influx of people moving from rural areas to urban areas such as cities and towns. This was seen in the ameriacas and western europe after the industrial revolution. Many countries are just reaching this point of mass movement towards cities, and some have no reached it atall. This can have large effects on the GSP, and other aspects of a country, we will explore soe of these now. To explore this, i will use the urban population % as the indicator of urbanization First I will compare the GDP of the countries by their urban population %
 
-```{r echo = FALSE}
+```{r}
 ggplot(world_data, aes(x= `Urban_population_(%_of_total_population)`, y=`GDP_per_capita_(current_US$)`)) +
   geom_point() 
 ```
 #a general trend upwards can be seen, however converting the y axis (GDP) to a log10 scale will make this more prominent, in addition to this I will add a trend line of the data to show the general trend of the data
-```{r echo = FALSE}
+```{r}
 ggplot(world_data, aes(x= `Urban_population_(%_of_total_population)`, y=`GDP_per_capita_(current_US$)`)) +
   geom_point() +
   scale_y_log10() + 
@@ -65,7 +65,7 @@ ggplot(world_data, aes(x= `Urban_population_(%_of_total_population)`, y=`GDP_per
 
 
 ## The second question I set out to explore was what is the mean gdp of each region
-```{r echo = FALSE}
+```{r}
 world_data_2 <- world_data %>%
   group_by(Region)%>%
 mutate(GDP =`GDP:_Gross_domestic_product_(million_current_US$)`) %>%
@@ -80,7 +80,7 @@ ggplot(world_data_2, aes(x=Region, y=mean_GDP))+
 ```
 
 ## While GDP is a good indicator or a countries wealth, GDP per capita indicates the wealth of "each person" in the country. A Truely health country will have ahhigh GDP and a high GDP per capita. For that reason this has been displayed in the same manner as the GDP below.
-```{r echo= = FALSE}
+```{r}
 ggplot(world_data_2, aes(x=Region, y=mean_GDPpercap))+ 
   geom_col()+
   scale_x_discrete(guide = guide_axis(n.dodge=5))

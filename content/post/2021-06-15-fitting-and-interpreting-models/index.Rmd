@@ -1,6 +1,6 @@
 ---
 title: "Fitting and Interpreting Models"
-author: "CalebCoulson"
+author: Caleb Coulson
 date: '2021-06-15'
 slug: fitting-and-interpreting-models
 categories: []

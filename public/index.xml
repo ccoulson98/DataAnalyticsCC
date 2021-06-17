@@ -6,7 +6,16 @@
     <description>Recent content on CalebCoulson - Fundamental of Analytics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Assignment 5: Caleb Coulson Data analysis</title>
+      <link>/2021/06/16/assignment-5-caleb-coulson-data-analysis/</link>
+      <pubDate>Wed, 16 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/16/assignment-5-caleb-coulson-data-analysis/</guid>
+      <description>Exploratory Data analysisDataset: country profile variablesThis dataset was obtained from kaggle.com and was extracted from UNData which was collected from more than 20 international statistical sources and compiled by the statistics and population division of the United Nations. it covers 4 majors sections whic inclides1. General information2. Economic indicators3. Social indicators4. Environmental &amp;amp; infrastructure indicatorsThe data was compiled for 2017For this analysis I will post the following inital 4 questions1.</description>
+    </item>
+    
     <item>
       <title>Fitting and Interpreting Models</title>
       <link>/2021/06/15/fitting-and-interpreting-models/</link>
