@@ -101,17 +101,19 @@ ggplot(world_data_4, aes(x=Life_expec))+
 ```
 
 ### from this plot it can be seen that there is a large range of life expectancys, from 49 to 86. To get a better insight as to where life expectancy's are high and low I will break it up by region and get a mean for each region.
-```{r,echo=FALSE, warning=FALSE}
+```{r,echo=FALSE, warning=FALSE, message=FALSE}
 world_data_5 <- world_data %>%
   group_by(Region)%>%
   mutate(Life_expec = as.numeric(`Life_expectancy_at_birth_(females,_years)`,na.rm = TRUE)) %>%
   summarize(mean_Life=mean(Life_expec, na.rm = TRUE))
-glimpse(world_data_5)
+```
+```{r, echo=FALSE, warning=FALSE}
 
 ggplot(world_data_5, aes(x=Region, y=mean_Life))+ 
   geom_col()+
   scale_x_discrete(guide = guide_axis(n.dodge=5))
 ```
+
 
 ### From this plot it can be seen that there are some regions that have much lower average life expectancy's than others, the 4 worst are the four sections of africa (west, east,south and north africa). 
 
@@ -126,6 +128,7 @@ mutate(GDPpercap =`GDP_per_capita_(current_US$)`) %>%
   mutate(mean_GDPpercap=mean(GDPpercap, na.rm = TRUE))
 
 ```
+
 ```{r, echo=FALSE, warning=FALSE}
 ggplot(world_data_3, aes(x=Region, y=mean_CO2))+ 
   geom_col()+
