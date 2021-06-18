@@ -45,7 +45,7 @@ names(world_data) <- gsub(" ", "_", names(world_data))
 ```
 
 
-## urbanization is characterized b the influx of people moving from rural areas to urban areas such as cities and towns. This was seen in the ameriacas and western europe after the industrial revolution. Many countries are just reaching this point of mass movement towards cities, and some have no reached it atall. This can have large effects on the GSP, and other aspects of a country, we will explore soe of these now. To explore this, i will use the urban population % as the indicator of urbanization First I will compare the GDP of the countries by their urban population %
+## urbanization is characterized by the influx of people moving from rural areas to urban areas such as cities and towns. This was seen in the ameriacas and western europe after the industrial revolution. Many countries are just reaching this point of mass movement towards cities, and some have no reached it atall. This can have large effects on the GDP, and other aspects of a country, we will explore soe of these now. To explore this, i will use the urban population % as the indicator of urbanization First I will compare the GDP of the countries by their urban population %
 
 ```{r, echo=FALSE, warning =FALSE}
 ggplot(world_data, aes(x= `Urban_population_(%_of_total_population)`, y=`GDP_per_capita_(current_US$)`)) +
@@ -69,10 +69,8 @@ ggplot(world_data, aes(x= `Urban_population_(%_of_total_population)`, y=`GDP_per
 ```{r, echo=FALSE, warning=FALSE}
 world_data_2 <- world_data %>%
   group_by(Region)%>%
-mutate(GDP =`GDP:_Gross_domestic_product_(million_current_US$)`) %>%
-  mutate(mean_GDP=mean(GDP, na.rm = TRUE)) %>%
-mutate(GDPpercap =`GDP_per_capita_(current_US$)`) %>%
-  mutate(mean_GDPpercap=mean(GDPpercap, na.rm = TRUE))
+mutate(GDP =as.numeric(`GDP:_Gross_domestic_product_(million_current_US$)`)) %>%
+  summarize(mean_GDP=mean(GDP, na.rm = TRUE))
 
 ggplot(world_data_2, aes(x=Region, y=mean_GDP))+ 
   geom_col()+
@@ -80,14 +78,19 @@ ggplot(world_data_2, aes(x=Region, y=mean_GDP))+
 
 ```
 
-## While GDP is a good indicator or a countries wealth, GDP per capita indicates the wealth of "each person" in the country. A Truely health country will have ahhigh GDP and a high GDP per capita. For that reason this has been displayed in the same manner as the GDP below.
+### While GDP is a good indicator or a countries wealth, GDP per capita indicates the wealth of "each person" in the country. A Truely healthy country will have a high GDP and a high GDP per capita. For that reason this has been displayed in the same manner as the GDP below.
 ```{r,echo=FALSE, warning=FALSE}
-ggplot(world_data_2, aes(x=Region, y=mean_GDPpercap))+ 
+world_data_6 <- world_data %>%
+  group_by(Region)%>%
+mutate(GDPper =as.numeric(`GDP_per_capita_(current_US$)`)) %>%
+  summarize(mean_GDPper=mean(GDPper, na.rm = TRUE))
+
+ggplot(world_data_6, aes(x=Region, y=mean_GDPper))+ 
   geom_col()+
   scale_x_discrete(guide = guide_axis(n.dodge=5))
 ```
 
-### it can be seen that when  the GDP per capita a is displayed that many of the regions are actually quite successfll in comparisson to their total GDP, an example of this would be the carribian, when looking at their total GDP they are very low but when looking attheir GDP per capita they are one of the world leaders.
+### it can be seen that when  the GDP per capita a is displayed that many of the regions are actually quite successfll in comparisson to their total GDP, an example of this would be western Erurope, when looking at their total GDP they are third but when looking at their GDP per capita they are the world leaders.
 
 ## The third question I seeked to answer was the distribution of life exspectancy, to look at this I will first create a histogram to get a general idea of the life expectancy's world wide. 
 
@@ -147,4 +150,7 @@ ggplot(world_data_3, aes(x=mean_GDPpercap, y=mean_CO2))+
 
 
 ### while it can be seen that the data set is small as it is 20 or so points, it can be seen that there is a General trend upwards in GDP as the mean CO2 output per capita increases. This again supports the argument that industrialization and urbanization is good for a country's population in terms of wealth, however it is still detrimental to the public's health. 
+
+
+#### When I performed this data analysis I ran into some issues with the data that needed rectifying. Firstly the titles of the captions were construted in a manner that were difficult to use so i altered these. The next issue i ran into was there were many inputs in the data frame that were not available for some countries and there were inputted as "-99" instead of "na" meaning i had to convert there inputs to na in order to exclude these values from my analysis as this would skew the results. Another issue i ran into was that when the creator made this dataframe they inputted the male and female data in the same column. I had to go into excel to seperate these columns, however this was an easy fix. The other issue i ran into while performing this data analysis was when i kept having the lables overlap, and i had to watch some videos online in order to discover how to rectify this. Overall I'm very pleases with how this data analysis turned out. i encountered some problems attempting to do the analysis I wanted to do but I overcame them for the most part. 
 
