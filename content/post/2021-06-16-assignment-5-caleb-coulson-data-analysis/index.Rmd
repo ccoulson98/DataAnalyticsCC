@@ -1,6 +1,6 @@
 ---
 title: 'Assignment 5: Caleb Coulson Data analysis'
-author: Caleb Coulson
+author: "Caleb Coulson"
 date: '2021-06-16'
 slug: assignment-5-caleb-coulson-data-analysis
 categories: []
@@ -8,7 +8,7 @@ tags: []
 ---
 
 
-# Exploratory Data analysis 
+# Exploratory Data analysis  
 ## Dataset: country profile variables
 
 ### This dataset was obtained from kaggle.com and was extracted from UNData which was collected from more than 20 international statistical sources and compiled by the statistics and population division of the United Nations. it covers 4 majors sections whic inclides 
@@ -49,7 +49,7 @@ names(world_data) <- gsub(" ", "_", names(world_data))
 
 ```{r, echo=FALSE, warning =FALSE}
 ggplot(world_data, aes(x= `Urban_population_(%_of_total_population)`, y=`GDP_per_capita_(current_US$)`)) +
-  geom_point() 
+  geom_point() + ggtitle("GDP per Capita vs urban population")
 ```
 
 ### A general trend upwards can be seen, however converting the y axis (GDP) to a log10 scale will make this more prominent, in addition to this I will add a trend line of the data to show the general trend of the data
@@ -58,7 +58,7 @@ ggplot(world_data, aes(x= `Urban_population_(%_of_total_population)`, y=`GDP_per
 ggplot(world_data, aes(x= `Urban_population_(%_of_total_population)`, y=`GDP_per_capita_(current_US$)`)) +
   geom_point() +
   scale_y_log10() + 
-  geom_smooth(formula = y ~ x,method= "lm", se= FALSE)
+  geom_smooth(formula = y ~ x,method= "lm", se= FALSE) +ggtitle("GDP per Capita vs urban population trend")
 ```
 
 ### From this plot it can be seen that, as expected, the general inflow of people to urban areas, leads to a general increase in GDP. This was seen in the industrial revolution and the same trend is still being seen in many countries today.
@@ -74,11 +74,14 @@ mutate(GDP =as.numeric(`GDP:_Gross_domestic_product_(million_current_US$)`)) %>%
 
 ggplot(world_data_2, aes(x=Region, y=mean_GDP))+ 
   geom_col()+
-  scale_x_discrete(guide = guide_axis(n.dodge=5))
+  scale_x_discrete(guide = guide_axis(n.dodge=5)) +
+  ggtitle("Mean GDP of regions of world")
 
 ```
 
-### While GDP is a good indicator or a countries wealth, GDP per capita indicates the wealth of "each person" in the country. A Truely healthy country will have a high GDP and a high GDP per capita. For that reason this has been displayed in the same manner as the GDP below.
+### From this it can be seen that North america has the largest GDP. This is folowed by eastern, and then westen europe. 
+
+## While GDP is a good indicator or a countries wealth, GDP per capita indicates the wealth of "each person" in the country. A Truely healthy country will have a high GDP and a high GDP per capita. For that reason this has been displayed in the same manner as the GDP below.
 ```{r,echo=FALSE, warning=FALSE}
 world_data_6 <- world_data %>%
   group_by(Region)%>%
@@ -87,7 +90,8 @@ mutate(GDPper =as.numeric(`GDP_per_capita_(current_US$)`)) %>%
 
 ggplot(world_data_6, aes(x=Region, y=mean_GDPper))+ 
   geom_col()+
-  scale_x_discrete(guide = guide_axis(n.dodge=5))
+  scale_x_discrete(guide = guide_axis(n.dodge=5))+
+  ggtitle("Mean GDP per Capita of regions of world")
 ```
 
 ### it can be seen that when  the GDP per capita a is displayed that many of the regions are actually quite successfll in comparisson to their total GDP, an example of this would be western Erurope, when looking at their total GDP they are third but when looking at their GDP per capita they are the world leaders.
@@ -100,7 +104,8 @@ mutate(world_data, Life_expec = as.numeric(`Life_expectancy_at_birth_(females,_y
 ```
 ```{r, echo=FALSE, warning=FALSE}
 ggplot(world_data_4, aes(x=Life_expec))+
-  geom_histogram( binwidth = 2) 
+  geom_histogram( binwidth = 2) +
+  ggtitle("summary of life expectancies in world")
 ```
 
 ### from this plot it can be seen that there is a large range of life expectancys, from 49 to 86. To get a better insight as to where life expectancy's are high and low I will break it up by region and get a mean for each region.
@@ -114,7 +119,8 @@ world_data_5 <- world_data %>%
 
 ggplot(world_data_5, aes(x=Region, y=mean_Life))+ 
   geom_col()+
-  scale_x_discrete(guide = guide_axis(n.dodge=5))
+  scale_x_discrete(guide = guide_axis(n.dodge=5)) +
+  ggtitle("Mean life expectancy's of regions of world")
 ```
 
 
@@ -128,24 +134,29 @@ world_data_3 <- world_data %>%
 mutate(CO2_out =`CO2_emission_estimates_(million_tons/tons_per_capita)`) %>%
   mutate(mean_CO2=mean(CO2_out, na.rm = TRUE)) %>%
 mutate(GDPpercap =`GDP_per_capita_(current_US$)`) %>%
-  mutate(mean_GDPpercap=mean(GDPpercap, na.rm = TRUE))
+  mutate(mean_GDPpercap=mean(GDPpercap, na.rm = TRUE)) %>%
+   summarize(mean_GDPpercap, mean_CO2)
 
 ```
 
 ```{r, echo=FALSE, warning=FALSE}
 ggplot(world_data_3, aes(x=Region, y=mean_CO2))+ 
   geom_col()+
-  scale_x_discrete(guide = guide_axis(n.dodge=5))
+  scale_x_discrete(guide = guide_axis(n.dodge=5)) +
+  ggtitle("Mean CO2 output of regions of world")
 ```
 
 
 ### from this plot it can be seen that the CO2 utput per cap is highest in Easten asia, north america, and westen asia. Now that we have the mean CO2 output, and mean GDP per cap for each region, It would be interesting to see the corrilation of these two values, that can be seen in he following graph
 
 ```{r, echo=FALSE, warning=FALSE}
+world_data_3 %>%
+  summarize(mean_GDPpercap, mean_CO2)
 ggplot(world_data_3, aes(x=mean_GDPpercap, y=mean_CO2))+
   geom_point() +
   scale_x_log10() +
-   geom_smooth(formula = y ~ x, method= "lm", se= FALSE)
+   geom_smooth(formula = y ~ x, method= "lm", se= FALSE) +
+  ggtitle("correlation of CO2 output and GDP per capita of regions of the world")
 ```
 
 

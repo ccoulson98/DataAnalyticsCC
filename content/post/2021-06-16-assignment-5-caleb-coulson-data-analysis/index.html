@@ -1,6 +1,6 @@
 ---
 title: 'Assignment 5: Caleb Coulson Data analysis'
-author: Caleb Coulson
+author: "Caleb Coulson"
 date: '2021-06-16'
 slug: assignment-5-caleb-coulson-data-analysis
 categories: []
@@ -68,10 +68,13 @@ tags: []
 <div id="the-second-question-i-set-out-to-explore-was-what-is-the-mean-gdp-of-each-region" class="section level2">
 <h2>The second question I set out to explore was what is the mean gdp of each region</h2>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<div id="while-gdp-is-a-good-indicator-or-a-countries-wealth-gdp-per-capita-indicates-the-wealth-of-each-person-in-the-country.-a-truely-healthy-country-will-have-a-high-gdp-and-a-high-gdp-per-capita.-for-that-reason-this-has-been-displayed-in-the-same-manner-as-the-gdp-below." class="section level3">
-<h3>While GDP is a good indicator or a countries wealth, GDP per capita indicates the wealth of “each person” in the country. A Truely healthy country will have a high GDP and a high GDP per capita. For that reason this has been displayed in the same manner as the GDP below.</h3>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div id="from-this-it-can-be-seen-that-north-america-has-the-largest-gdp.-this-is-folowed-by-eastern-and-then-westen-europe." class="section level3">
+<h3>From this it can be seen that North america has the largest GDP. This is folowed by eastern, and then westen europe.</h3>
 </div>
+</div>
+<div id="while-gdp-is-a-good-indicator-or-a-countries-wealth-gdp-per-capita-indicates-the-wealth-of-each-person-in-the-country.-a-truely-healthy-country-will-have-a-high-gdp-and-a-high-gdp-per-capita.-for-that-reason-this-has-been-displayed-in-the-same-manner-as-the-gdp-below." class="section level2">
+<h2>While GDP is a good indicator or a countries wealth, GDP per capita indicates the wealth of “each person” in the country. A Truely healthy country will have a high GDP and a high GDP per capita. For that reason this has been displayed in the same manner as the GDP below.</h2>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <div id="it-can-be-seen-that-when-the-gdp-per-capita-a-is-displayed-that-many-of-the-regions-are-actually-quite-successfll-in-comparisson-to-their-total-gdp-an-example-of-this-would-be-western-erurope-when-looking-at-their-total-gdp-they-are-third-but-when-looking-at-their-gdp-per-capita-they-are-the-world-leaders." class="section level3">
 <h3>it can be seen that when the GDP per capita a is displayed that many of the regions are actually quite successfll in comparisson to their total GDP, an example of this would be western Erurope, when looking at their total GDP they are third but when looking at their GDP per capita they are the world leaders.</h3>
 </div>
@@ -92,6 +95,22 @@ tags: []
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <div id="from-this-plot-it-can-be-seen-that-the-co2-utput-per-cap-is-highest-in-easten-asia-north-america-and-westen-asia.-now-that-we-have-the-mean-co2-output-and-mean-gdp-per-cap-for-each-region-it-would-be-interesting-to-see-the-corrilation-of-these-two-values-that-can-be-seen-in-he-following-graph" class="section level3">
 <h3>from this plot it can be seen that the CO2 utput per cap is highest in Easten asia, north america, and westen asia. Now that we have the mean CO2 output, and mean GDP per cap for each region, It would be interesting to see the corrilation of these two values, that can be seen in he following graph</h3>
+<pre><code>## `summarise()` has grouped output by &#39;Region&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 229 x 3
+## # Groups:   Region [22]
+##    Region    mean_GDPpercap mean_CO2
+##    &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Caribbean         17684.     103.
+##  2 Caribbean         17684.     103.
+##  3 Caribbean         17684.     103.
+##  4 Caribbean         17684.     103.
+##  5 Caribbean         17684.     103.
+##  6 Caribbean         17684.     103.
+##  7 Caribbean         17684.     103.
+##  8 Caribbean         17684.     103.
+##  9 Caribbean         17684.     103.
+## 10 Caribbean         17684.     103.
+## # ... with 219 more rows</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="while-it-can-be-seen-that-the-data-set-is-small-as-it-is-20-or-so-points-it-can-be-seen-that-there-is-a-general-trend-upwards-in-gdp-as-the-mean-co2-output-per-capita-increases.-this-again-supports-the-argument-that-industrialization-and-urbanization-is-good-for-a-countrys-population-in-terms-of-wealth-however-it-is-still-detrimental-to-the-publics-health." class="section level3">
