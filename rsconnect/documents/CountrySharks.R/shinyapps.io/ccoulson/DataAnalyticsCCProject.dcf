@@ -1,0 +1,14 @@
+name: DataAnalyticsCCProject
+title: DataAnalyticsCCProject
+username:
+account: ccoulson
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4304090
+bundleId: 4743424
+url: https://ccoulson.shinyapps.io/DataAnalyticsCCProject/
+when: 1624369493.52305
+lastSyncTime: 1624369493.52305
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|.Rprofile|~$covid19_1105.xlsx|Assignment_4_CalebCoulson.R|config.yaml|covid-speeches-words.rds|covid19_1105.csv|covid19_1105.xlsx|GSAF5.csv|index.Rmd|layouts/shortcodes/blogdown/postref.html|netlify.toml|R/build.R|R/build2.R|Sharks.R|shiney.R|static/.gitkeep|content|public|themes

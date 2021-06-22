@@ -1,0 +1,84 @@
+---
+title: Final Project Caleb Coulson
+author: ''
+date: '2021-06-22'
+slug: final-project-caleb-coulson
+categories:
+  - ggplot2
+  - shiny
+  - tidyverse
+tags: []
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="this-project-will-focus-on-a-dataset-contain-information-about-shark-attacks-worldwide-from-the-last-150-years." class="section level2">
+<h2>This Project will focus on a dataset contain information about shark attacks worldwide from the last 150 years.</h2>
+</div>
+<div id="using-this-data-i-will-explore-some-questions-such-as" class="section level2">
+<h2>Using this data I will explore some questions such as…</h2>
+<div id="how-many-shark-attcks-have-been-recorded-each-year" class="section level3">
+<h3>1. How many shark attcks have been recorded each year</h3>
+</div>
+<div id="what-are-the-most-popular-activities-being-performed-at-time-of-attacks" class="section level3">
+<h3>2. what are the most popular activities being performed at time of attacks</h3>
+</div>
+<div id="what-is-the-survival-rate-of-a-shark-attack" class="section level3">
+<h3>3. what is the survival rate of a shark attack</h3>
+</div>
+<div id="in-what-countries-have-there-been-the-most-attcks-and-on-what-genders" class="section level3">
+<h3>4. In what countries have there been the most attcks, and on what genders</h3>
+<p>##Observations and insights
+### Before using this data I went through it’s quality. On the website I obtained it from it was rated a 7.1/10, so the data quality was not perfect. The first Thing I noticed was that the “Date” columnn was not usable in it’s currect state, so i converted the original data to be in the appropriate “yyyy-mm-dd” format. However a lot of the older data was in an unusable format. Due to the unknow exact dates of these old attacks they were inputted either in an odd format or with the words “reported on” included. This made this data unusable. For this reason I decided 10 years of data was enough so my final data frame used is from the year 1915-2016</p>
+<pre><code>## Warning: Missing column names filled in: &#39;X23&#39; [23], &#39;X24&#39; [24]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;Case Number&#39; =&gt; &#39;Case
+## Number_1&#39; [20], &#39;Case Number&#39; =&gt; &#39;Case Number_2&#39; [21]</code></pre>
+<pre><code>## Warning: 1 parsing failure.
+##  row col           expected       actual         file
+## 3110 X23 1/0/T/F/TRUE/FALSE stopped here &#39;sharks.csv&#39;</code></pre>
+</div>
+</div>
+<div id="the-first-question-i-aimed-to-answer-was-the-quantity-of-shark-attacks-reported-through-the-years" class="section level2">
+<h2>The first question i aimed to answer was the quantity of shark attacks reported through the years</h2>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="while-this-graph-shows-the-number-of-attacks-per-year-it-could-bennifit-from-the-addition-of-a-line-showing-the-mean-value-and-some-better-labels" class="section level2">
+<h2>While this graph shows the number of attacks per year, it could bennifit from the addition of a line showing the mean value, and some better labels</h2>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div id="from-this-plot-it-can-be-seen-that-the-average-number-of-attacks-worldwide-is-50-per-year-however-this-number-has-been-larger-in-recent-years-and-data-is-scarace-at-early-times-so-this-mean-of-may-be-skewed-lower-due-to-the-lack-of-data-from-early-years." class="section level3">
+<h3>From this plot it can be seen that the average number of attacks worldwide is ~50 per year, however this number has been larger in recent years and data is scarace at early times so this mean of may be skewed lower due to the lack of data from early years.</h3>
+</div>
+</div>
+<div id="the-second-question-i-aimed-to-answer-was-wha-were-the-most-common-activitiesbeing-performed-when-attacls-occured" class="section level2">
+<h2>the second question I aimed to answer was wha were the most common activitiesbeing performed when attacls occured</h2>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+##As expected, the most common activities being performed that lead to a shark attack are swimming and surfing. I was suprised to see fishing and spear fishing were nearly identical, however I feel as though this may be a data input issue where spearfishing was sometimes inputted as simply fishing.</p>
+</div>
+<div id="the-third-question-i-wanted-to-answer-was-what-is-the-survival-rate-of-shark-attacks" class="section level2">
+<h2>The third question i wanted to answer was what is the survival rate of shark attacks</h2>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+## From this it can be seen that there is roughly a 80% of survival from a shark attack</p>
+</div>
+<div id="the-final-step-i-wanted-to-complete-was-to-identify-the-10-most-common-countries-and-make-an-interactive-plot-on-what-type-of-attacks-they-were.-som-eof-the-types-of-attacks-are-unprevoked-prevoked-boating-etc." class="section level2">
+<h2>The final step I wanted to complete was to identify the 10 most common Countries, and make an interactive plot on what “type”’ of attacks they were. Som eof the types of attacks are “unprevoked”, “prevoked”, “boating” etc.</h2>
+<div id="the-first-step-was-to-determine-the-top-10-most-common-countires-where-shark-attacks-occur" class="section level3">
+<h3>The first step was to determine the top 10 most common countires where shark attacks occur</h3>
+<pre><code>## # A tibble: 10 x 2
+##    Country              n
+##    &lt;chr&gt;            &lt;int&gt;
+##  1 USA               1736
+##  2 AUSTRALIA          867
+##  3 SOUTH AFRICA       463
+##  4 BRAZIL              93
+##  5 BAHAMAS             80
+##  6 PAPUA NEW GUINEA    77
+##  7 NEW ZEALAND         68
+##  8 MEXICO              54
+##  9 REUNION             48
+## 10 NEW CALEDONIA       38</code></pre>
+</div>
+</div>
+<div id="the-previous-list-shows-the-top-10-most-common-countries-where-shark-attacks-occur.-the-following-interactive-chart-allows-you-to-see-the-distribution-of-types-of-attcacks-in-each-of-these-10-cntries" class="section level2">
+<h2>The previous list shows the top 10 most common countries where shark attacks occur. The following interactive chart allows you to see the distribution of types of attcacks in each of these 10 cntries</h2>
+</div>

@@ -1,0 +1,93 @@
+---
+title: Final Project Caleb Coulson
+author: ''
+date: '2021-06-22'
+slug: final-project-caleb-coulson
+categories:
+  - ggplot2
+  - shiny
+  - tidyverse
+tags: []
+---
+
+## This Project will focus on a dataset contain information about shark attacks worldwide from the last 150 years. 
+
+## Using this data I will explore some questions such as...
+### 1. How many shark attcks have been recorded each year 
+### 2. what are the most popular activities being performed at time of attacks
+### 3. what is the survival rate of a shark attack
+### 4. In what countries have there been the most attcks, and on what genders
+
+##Observations and insights 
+### Before using this data I went through it's quality. On the website I obtained it from it was rated a 7.1/10, so the data quality was not perfect. The first Thing I noticed was that the "Date" columnn was not usable in it's currect state, so i converted the original data to be in the appropriate "yyyy-mm-dd" format. However a lot of the older data was in an unusable format. Due to the unknow exact dates of these old attacks they were inputted either in an odd format or with the words "reported on" included. This made this data unusable. For this reason I decided 10 years of data was enough so my final data frame used is from the year 1915-2016
+
+```{r, echo = FALSE, message = FALSE, }
+library(tidyverse)
+library(tidytext)
+library(glue)
+library(plotly)
+```
+
+```{r, echo=FALSE, message=FALSE}
+sharks_data <- read_csv("sharks.csv")
+```
+
+## The first question i aimed to answer was the quantity of shark attacks reported through the years
+```{r, echo=FALSE}
+sharks_data %>%
+  count(Year) %>%
+ggplot(aes(x=Year, y =n)) +
+  geom_point()
+```
+
+## While this graph shows the number of attacks per year, it could bennifit from the addition of a line showing the mean value, and some better labels
+```{r, echo=FALSE}
+sharks_data %>%
+  count(Year) %>% 
+  mutate(mean_attacks = mean(n)) %>%
+  ggplot(aes(x=Year, y =n)) +
+  geom_line() +
+  geom_hline(yintercept =48.62, color = 'red' ) +
+  labs (y = "Number of Attacks") +
+  ggtitle("Number of shark attacks throughout years (1930-2016)")
+
+```
+
+### From this plot it can be seen that the average number of attacks worldwide is ~50 per year, however this number has been larger in recent years and data is scarace at early times so this mean of may be skewed lower due to the lack of data from early years.
+
+## the second question I aimed to answer was wha were the most common activitiesbeing performed when attacls occured 
+```{r, echo=FALSE}
+sharks_data %>%
+  count(Activity) %>%
+  arrange(desc(n)) %>%
+  slice(1:2,4:11) %>%
+ ggplot(aes(x=Activity, y=n, NA.rm = TRUE)) +
+  geom_col() + scale_x_discrete(guide = guide_axis(n.dodge = 2))
+ 
+```
+##As expected, the most common activities being performed that lead to a shark attack are swimming and surfing. I was suprised to see fishing and spear fishing were nearly identical, however I feel as though this may be a data input issue where spearfishing was sometimes inputted as simply fishing.
+
+## The third question i wanted to answer was what is the survival rate of shark attacks
+```{r, echo=FALSE}
+sharks_data %>%
+  count(`Fatal (Y/N)`) %>% 
+  slice(1:1, 3:3) %>%
+  mutate(percentage = n/(3362+820)*100) %>%
+  ggplot(aes(x=`Fatal (Y/N)`, y = percentage)) +
+  geom_col()
+
+```
+## From this it can be seen that there is roughly a 80% of survival from a shark attack
+
+
+## The final step I wanted to complete was to identify the 10 most common Countries, and make an interactive plot on what "type"' of attacks they were. Som eof the types of attacks are "unprevoked", "prevoked", "boating" etc. 
+### The first step was to determine the top 10 most common countires where shark attacks occur 
+```{r,, echo=FALSE}
+sharks_data %>%
+  count(Country) %>%
+  arrange(desc(n)) %>%
+  slice(1:10)
+```
+## The previous list shows the top 10 most common countries where shark attacks occur. The following interactive chart allows you to see the distribution of types of attcacks in each of these 10 cntries
+
+
