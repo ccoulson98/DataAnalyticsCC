@@ -19,7 +19,7 @@ tags: []
 ### 4. In what countries have there been the most attcks, and on what genders
 
 
-##Observations and insights
+## Observations and insights
 
 ### Before using this data I went through it's quality. On the website I obtained it from it was rated a 7.1/10, so the data quality was not perfect. The first Thing I noticed was that the "Date" columnn was not usable in it's currect state, so i converted the original data to be in the appropriate "yyyy-mm-dd" format. However a lot of the older data was in an unusable format. Due to the unknow exact dates of these old attacks they were inputted either in an odd format or with the words "reported on" included. This made this data unusable. For this reason I decided 10 years of data was enough so my final data frame used is from the year 1915-2016
 
@@ -68,7 +68,7 @@ sharks_data %>%
  
 ```
 
-###As expected, the most common activities being performed that lead to a shark attack are swimming and surfing. I was suprised to see fishing and spear fishing were nearly identical, however I feel as though this may be a data input issue where spearfishing was sometimes inputted as simply fishing.
+### As expected, the most common activities being performed that lead to a shark attack are swimming and surfing. I was suprised to see fishing and spear fishing were nearly identical, however I feel as though this may be a data input issue where spearfishing was sometimes inputted as simply fishing.
 
 ## The third question i wanted to answer was what is the survival rate of shark attacks
 ```{r, echo=FALSE}
