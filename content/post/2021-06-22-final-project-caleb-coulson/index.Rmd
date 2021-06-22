@@ -8,6 +8,8 @@ categories:
   - shiny
   - tidyverse
 tags: []
+runtime: shiny
+output: html_document 
 ---
 
 ## This Project will focus on a dataset contain information about shark attacks worldwide from the last 150 years. 
@@ -92,6 +94,7 @@ sharks_data %>%
   arrange(desc(n)) %>%
   slice(1:10)
 ```
-## The previous list shows the top 10 most common countries where shark attacks occur. The following interactive chart allows you to see the distribution of types of attcacks in each of these 10 cntries
+## The previous list shows the top 10 most common countries where shark attacks occur. The following interactive chart allows you to see the distribution of types of attcacks in each of these 10 countries
 
-
+<iframe src="https://ccoulson.shinyapps.io/DataAnalyticsCCProject/"
+height="800" width="100%" frameborder="no"></iframe>
