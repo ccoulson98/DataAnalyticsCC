@@ -12,18 +12,18 @@ runtime: shiny
 output: html_document 
 ---
 
-## This Project will focus on a dataset contain information about shark attacks worldwide from the last 150 years. 
+## This Project will focus on a dataset containing information about shark attacks worldwide from the last 150 years. 
 
 ## Using this data I will explore some questions such as...
 ### 1. How many shark attcks have been recorded each year 
 ### 2. what are the most popular activities being performed at time of attacks
 ### 3. what is the survival rate of a shark attack
-### 4. In what countries have there been the most attcks, and on what genders
+### 4. In what countries have there been the most attcks, and what types do they classify as 
 
 
 ## Observations and insights
 
-### Before using this data I went through it's quality. On the website I obtained it from it was rated a 7.1/10, so the data quality was not perfect. The first Thing I noticed was that the "Date" columnn was not usable in it's currect state, so i converted the original data to be in the appropriate "yyyy-mm-dd" format. However a lot of the older data was in an unusable format. Due to the unknow exact dates of these old attacks they were inputted either in an odd format or with the words "reported on" included. This made this data unusable. For this reason I decided 85 years of data was enough so my final data frame used is from the year 1930-2016
+### Before using this data I went through it's quality. On the website I obtained it from (Kaglle.com), it was rated a 7.1/10, so the data quality was not perfect. The first Thing I noticed was that the "Date" columnn was not usable in it's currect state, so I converted the original data to be in the appropriate "yyyy-mm-dd" format. However a lot of the older data was in an unusable format. Due to the unknow exact dates of these old attacks they were inputted either in an odd format or with the words "reported on" included. This made this data unusable. For this reason I decided ~85 years of data was enough so my final data frame used is from the year 1930-2016
 
 ```{r, echo = FALSE, message = FALSE, }
 library(tidyverse)
@@ -41,7 +41,9 @@ sharks_data <- read_csv("sharks.csv")
 sharks_data %>%
   count(Year) %>%
 ggplot(aes(x=Year, y =n)) +
-  geom_point()
+  geom_point() +
+  ggtitle("Number of Shark attacks by year (1930-2016)") +
+ 
 ```
 
 ## While this graph shows the number of attacks per year, it could bennifit from the addition of a line showing the mean value, and some better labels
@@ -57,9 +59,9 @@ sharks_data %>%
 
 ```
 
-### From this plot it can be seen that the average number of attacks worldwide is ~50 per year, however this number has been larger in recent years and data is scarace at early times so this mean of may be skewed lower due to the lack of data from early years.
+### From this plot it can be seen that the average number of attacks worldwide is ~50 per year, however this number has been larger in recent years and data is scarace at early times so the mean of may be skewed lower due to the lack of data from early years.
 
-## the second question I aimed to answer was wha were the most common activitiesbeing performed when attacls occured 
+## the second question I aimed to answer was what were the most common activities being performed when attacks occured 
 ```{r, echo=FALSE}
 sharks_data %>%
   count(Activity) %>%
@@ -72,7 +74,7 @@ sharks_data %>%
 
 ### As expected, the most common activities being performed that lead to a shark attack are swimming and surfing. I was suprised to see fishing and spear fishing were nearly identical, however I feel as though this may be a data input issue where spearfishing was sometimes inputted as simply fishing.
 
-## The third question i wanted to answer was what is the survival rate of shark attacks
+## The third question I wanted to answer was what is the survival rate of shark attacks
 ```{r, echo=FALSE}
 sharks_data %>%
   count(`Fatal (Y/N)`) %>% 
@@ -100,6 +102,6 @@ sharks_data %>%
 height="800" width="100%" frameborder="no"></iframe>
 
 
-### From this interactive data visualization it can be seen that for all countries the majority of shark attacks are unprovoked. This may seem scary to some bt considering this data is over 90 years. A total of ~4200 shark attacks is not many.
+### From this interactive data visualization it can be seen that for all countries the majority of shark attacks are unprovoked. This may seem scary to some bt considering this data spans over 85 years, a total of ~4200 shark attacks is not many.
 
-#### During this data analysis I had a ot of fun. Growing up I always watched shark week so this dataset really caught my eye. I was interested to see that only 20% of shark attacks lead to fatalities. Another Interesting insight was that the countr of "Reunion" had the 9th most shark attacks. i had never heard of this place before so I loked it up and learned it was a french colony. IE, it is part of france but is an island of the south, east coast of Africa. Overall this dataset was pretty easy to work with, with the exception of the dates which required a lot of working with t=in order to be able to use the data set. 
+#### During this data analysis I had a lot of fun. Growing up I always watched shark week so this dataset really caught my eye. I was interested to see that only 20% of shark attacks lead to fatalities. Another Interesting insight was that the country of "Reunion" had the 9th most shark attacks. I had never heard of this place before so I loked it up and learned it was a french colony. IE, it is part of france but is an island of the south, east coast of Africa. Overall this dataset was pretty easy to work with, with the exception of the dates which required a lot of working with in order to be able to use the data set. 
